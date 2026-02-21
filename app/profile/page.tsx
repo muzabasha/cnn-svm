@@ -99,7 +99,7 @@ export default function ProfilePage() {
                     <div className="flex flex-col md:flex-row items-center gap-8">
                         <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-blue-500 shadow-lg flex-shrink-0 bg-gray-100">
                             <img
-                                src="https://raw.githubusercontent.com/muzabasha/cnn-svm/main/public/profile-photo.jpg"
+                                src="/DP_profile.png"
                                 alt="Dr. Syed Muzamil Basha"
                                 className="w-full h-full object-cover"
                                 onError={(e) => {
