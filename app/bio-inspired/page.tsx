@@ -372,6 +372,9 @@ function GeneticAlgorithm() {
 function ParticleSwarm() {
     const [iteration, setIteration] = useState(0)
     const [numParticles, setNumParticles] = useState(20)
+    const [w, setW] = useState(0.7) // Inertia weight
+    const [c1, setC1] = useState(1.5) // Cognitive coefficient
+    const [c2, setC2] = useState(1.5) // Social coefficient
     const [isRunning, setIsRunning] = useState(false)
 
     const runSwarm = () => {
@@ -408,9 +411,121 @@ function ParticleSwarm() {
 
     return (
         <div className="space-y-6">
+            {/* Mathematical Foundation */}
             <Card>
                 <CardHeader>
-                    <CardTitle>🐝 Particle Swarm Optimization: Follow the Leader</CardTitle>
+                    <CardTitle>📐 Particle Swarm Optimization Mathematics</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <div className="space-y-6">
+                        <div className="bg-blue-50 p-6 rounded-xl border-2 border-blue-200">
+                            <h3 className="text-lg font-bold text-blue-900 mb-4">Core PSO Equations</h3>
+
+                            <div className="space-y-4">
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">1. Velocity Update Equation</p>
+                                    <BlockMath math="v_i^{t+1} = w \cdot v_i^t + c_1 r_1 (p_i - x_i^t) + c_2 r_2 (g - x_i^t)" />
+                                    <div className="mt-3 space-y-1 text-xs text-gray-700">
+                                        <p>• <InlineMath math="v_i^{t+1}" /> = new velocity of particle i</p>
+                                        <p>• <InlineMath math="w" /> = {w.toFixed(2)} (inertia weight - momentum)</p>
+                                        <p>• <InlineMath math="c_1" /> = {c1.toFixed(2)} (cognitive coefficient - personal best attraction)</p>
+                                        <p>• <InlineMath math="c_2" /> = {c2.toFixed(2)} (social coefficient - global best attraction)</p>
+                                        <p>• <InlineMath math="r_1, r_2" /> = random numbers in [0,1]</p>
+                                        <p>• <InlineMath math="p_i" /> = personal best position of particle i</p>
+                                        <p>• <InlineMath math="g" /> = global best position of swarm</p>
+                                        <p>• <InlineMath math="x_i^t" /> = current position of particle i</p>
+                                    </div>
+                                    <div className="mt-3 p-3 bg-blue-50 rounded">
+                                        <p className="text-xs font-semibold text-blue-900">Three Components:</p>
+                                        <p className="text-xs text-blue-700">
+                                            1. <InlineMath math="w \cdot v_i^t" /> - Inertia (keep moving in same direction)<br />
+                                            2. <InlineMath math="c_1 r_1 (p_i - x_i^t)" /> - Cognitive (move toward personal best)<br />
+                                            3. <InlineMath math="c_2 r_2 (g - x_i^t)" /> - Social (move toward global best)
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">2. Position Update Equation</p>
+                                    <BlockMath math="x_i^{t+1} = x_i^t + v_i^{t+1}" />
+                                    <p className="text-xs text-gray-600 mt-2">
+                                        Update particle position by adding the new velocity
+                                    </p>
+                                    <div className="mt-3 p-3 bg-green-50 rounded">
+                                        <p className="text-xs font-semibold text-green-900">Example (1D):</p>
+                                        <p className="text-xs text-green-700 font-mono">
+                                            Current position: x = 5.0<br />
+                                            New velocity: v = 0.8<br />
+                                            New position: x = 5.0 + 0.8 = 5.8
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">3. Personal Best Update</p>
+                                    <BlockMath math="p_i^{t+1} = \begin{cases} x_i^{t+1} & \text{if } f(x_i^{t+1}) < f(p_i^t) \\ p_i^t & \text{otherwise} \end{cases}" />
+                                    <p className="text-xs text-gray-600 mt-2">
+                                        Update personal best if current position is better (minimization problem)
+                                    </p>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">4. Global Best Update</p>
+                                    <BlockMath math="g^{t+1} = \arg\min_{i} f(p_i^{t+1})" />
+                                    <p className="text-xs text-gray-600 mt-2">
+                                        Global best is the best personal best among all particles
+                                    </p>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">5. Velocity Clamping</p>
+                                    <BlockMath math="v_i^{t+1} = \begin{cases} v_{max} & \text{if } v_i^{t+1} > v_{max} \\ -v_{max} & \text{if } v_i^{t+1} < -v_{max} \\ v_i^{t+1} & \text{otherwise} \end{cases}" />
+                                    <p className="text-xs text-gray-600 mt-2">
+                                        Limit velocity to prevent particles from moving too fast
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-yellow-50 p-6 rounded-xl border-2 border-yellow-200">
+                            <h3 className="text-lg font-bold text-yellow-900 mb-4">💡 Parameter Tuning Guide</h3>
+                            <div className="space-y-3 text-sm text-yellow-800">
+                                <div className="flex items-start gap-3">
+                                    <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">w</div>
+                                    <div>
+                                        <p className="font-semibold">Inertia Weight (w = {w.toFixed(2)})</p>
+                                        <p className="text-xs">High (0.9): More exploration, slower convergence</p>
+                                        <p className="text-xs">Low (0.4): More exploitation, faster convergence</p>
+                                        <p className="text-xs">Typical: 0.7 or decrease from 0.9 to 0.4 over time</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-3">
+                                    <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">c₁</div>
+                                    <div>
+                                        <p className="font-semibold">Cognitive Coefficient (c₁ = {c1.toFixed(2)})</p>
+                                        <p className="text-xs">Controls attraction to personal best</p>
+                                        <p className="text-xs">Typical range: 1.5 - 2.0</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-3">
+                                    <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">c₂</div>
+                                    <div>
+                                        <p className="font-semibold">Social Coefficient (c₂ = {c2.toFixed(2)})</p>
+                                        <p className="text-xs">Controls attraction to global best</p>
+                                        <p className="text-xs">Typical range: 1.5 - 2.0</p>
+                                        <p className="text-xs">Balance: c₁ + c₂ ≈ 4.0 for stability</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </CardContent>
+            </Card>
+
+            {/* Interactive Simulation */}
+            <Card>
+                <CardHeader>
+                    <CardTitle>🐝 Interactive PSO Simulation</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <p className="text-gray-600 mb-6">
@@ -422,7 +537,7 @@ function ParticleSwarm() {
                         <div>
                             <h3 className="font-semibold mb-4">Swarm Parameters</h3>
 
-                            <div className="mb-6">
+                            <div className="space-y-4 mb-6">
                                 <Slider
                                     label={`Number of Particles: ${numParticles}`}
                                     value={numParticles}
@@ -430,6 +545,34 @@ function ParticleSwarm() {
                                     min={10}
                                     max={50}
                                     step={5}
+                                    description="Swarm size"
+                                />
+                                <Slider
+                                    label={`Inertia Weight (w): ${w.toFixed(2)}`}
+                                    value={w}
+                                    onChange={setW}
+                                    min={0.4}
+                                    max={0.9}
+                                    step={0.05}
+                                    description="Balance exploration vs exploitation"
+                                />
+                                <Slider
+                                    label={`Cognitive (c₁): ${c1.toFixed(2)}`}
+                                    value={c1}
+                                    onChange={setC1}
+                                    min={0.5}
+                                    max={2.5}
+                                    step={0.1}
+                                    description="Personal best attraction"
+                                />
+                                <Slider
+                                    label={`Social (c₂): ${c2.toFixed(2)}`}
+                                    value={c2}
+                                    onChange={setC2}
+                                    min={0.5}
+                                    max={2.5}
+                                    step={0.1}
+                                    description="Global best attraction"
                                 />
                             </div>
 
@@ -444,6 +587,7 @@ function ParticleSwarm() {
                                 </Button>
                                 <Button
                                     onClick={() => setIteration(0)}
+                                    variant="outline"
                                     className="flex items-center gap-2"
                                 >
                                     <RotateCcw className="w-4 h-4" />
@@ -454,11 +598,11 @@ function ParticleSwarm() {
                                 <ResponsiveContainer width="100%" height="100%">
                                     <ScatterChart>
                                         <CartesianGrid strokeDasharray="3 3" />
-                                        <XAxis dataKey="x" domain={[-6, 6]} />
-                                        <YAxis dataKey="y" domain={[-6, 6]} />
+                                        <XAxis dataKey="x" domain={[-6, 6]} label={{ value: 'x₁', position: 'insideBottom', offset: -5 }} />
+                                        <YAxis dataKey="y" domain={[-6, 6]} label={{ value: 'x₂', angle: -90, position: 'insideLeft' }} />
                                         <Tooltip />
                                         <Scatter name="Particles" data={particles} fill="#10b981" />
-                                        <Scatter name="Target" data={[{ x: 0, y: 0 }]} fill="#ef4444" shape="star" />
+                                        <Scatter name="Global Best (g)" data={[{ x: 0, y: 0 }]} fill="#ef4444" shape="star" />
                                     </ScatterChart>
                                 </ResponsiveContainer>
                             </div>
@@ -469,22 +613,41 @@ function ParticleSwarm() {
                             <ResponsiveContainer width="100%" height={300}>
                                 <LineChart data={convergenceData}>
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="iteration" />
-                                    <YAxis />
+                                    <XAxis dataKey="iteration" label={{ value: 'Iteration (t)', position: 'insideBottom', offset: -5 }} />
+                                    <YAxis label={{ value: 'Fitness f(x)', angle: -90, position: 'insideLeft' }} />
                                     <Tooltip />
                                     <Legend />
-                                    <Line type="monotone" dataKey="globalBest" stroke="#10b981" strokeWidth={2} name="Global Best" />
-                                    <Line type="monotone" dataKey="averageFitness" stroke="#3b82f6" strokeWidth={2} name="Average" />
+                                    <Line type="monotone" dataKey="globalBest" stroke="#10b981" strokeWidth={2} name="Global Best f(g)" />
+                                    <Line type="monotone" dataKey="averageFitness" stroke="#3b82f6" strokeWidth={2} name="Average f(x)" />
                                 </LineChart>
                             </ResponsiveContainer>
 
                             <div className="mt-4 p-4 bg-green-50 rounded-lg">
                                 <h4 className="font-semibold text-green-900 mb-2">Swarm Status</h4>
                                 <div className="text-sm text-green-700 space-y-1">
-                                    <p>Iteration: {iteration}</p>
-                                    <p>Global Best: {convergenceData[iteration]?.globalBest.toFixed(2) || 0}</p>
+                                    <p>Iteration t: {iteration}</p>
+                                    <p>Global Best f(g): {convergenceData[iteration]?.globalBest.toFixed(2) || 0}</p>
                                     <p>Active Particles: {numParticles}</p>
+                                    <p>Parameters: w={w.toFixed(2)}, c₁={c1.toFixed(2)}, c₂={c2.toFixed(2)}</p>
                                     <p>Convergence: {Math.min(100, iteration * 2).toFixed(0)}%</p>
+                                </div>
+                            </div>
+
+                            <div className="mt-4 p-4 bg-purple-50 rounded-lg">
+                                <h4 className="font-semibold text-purple-900 mb-2">📊 Velocity Components</h4>
+                                <div className="text-xs text-purple-700 space-y-2">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-16 h-3 bg-blue-400 rounded"></div>
+                                        <span>Inertia: {(w * 100).toFixed(0)}%</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-16 h-3 bg-green-400 rounded"></div>
+                                        <span>Cognitive: {(c1 / (w + c1 + c2) * 100).toFixed(0)}%</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-16 h-3 bg-orange-400 rounded"></div>
+                                        <span>Social: {(c2 / (w + c1 + c2) * 100).toFixed(0)}%</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -494,31 +657,48 @@ function ParticleSwarm() {
 
             <Card>
                 <CardHeader>
-                    <CardTitle>PSO Principles</CardTitle>
+                    <CardTitle>🎯 PSO Algorithm Steps</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div className="p-4 bg-blue-50 rounded-lg">
-                            <div className="text-2xl mb-2">🎯</div>
-                            <h4 className="font-semibold text-blue-900 mb-2">Personal Best</h4>
-                            <p className="text-xs text-blue-700">
-                                Each particle remembers its own best position found so far
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div className="p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+                            <div className="text-3xl mb-2">🎲</div>
+                            <h4 className="font-semibold text-blue-900 mb-2">1. Initialize</h4>
+                            <p className="text-xs text-blue-700 mb-2">
+                                Random positions <InlineMath math="x_i" /> and velocities <InlineMath math="v_i" />
+                            </p>
+                            <p className="text-xs text-blue-600">
+                                Set <InlineMath math="p_i = x_i" /> for all particles
                             </p>
                         </div>
 
-                        <div className="p-4 bg-green-50 rounded-lg">
-                            <div className="text-2xl mb-2">👑</div>
-                            <h4 className="font-semibold text-green-900 mb-2">Global Best</h4>
-                            <p className="text-xs text-green-700">
-                                The swarm shares the best position found by any particle
+                        <div className="p-4 bg-green-50 rounded-lg border-2 border-green-200">
+                            <div className="text-3xl mb-2">📊</div>
+                            <h4 className="font-semibold text-green-900 mb-2">2. Evaluate</h4>
+                            <p className="text-xs text-green-700 mb-2">
+                                Calculate fitness <InlineMath math="f(x_i)" /> for each particle
+                            </p>
+                            <p className="text-xs text-green-600">
+                                Update <InlineMath math="p_i" /> and <InlineMath math="g" />
                             </p>
                         </div>
 
-                        <div className="p-4 bg-purple-50 rounded-lg">
-                            <div className="text-2xl mb-2">🚀</div>
-                            <h4 className="font-semibold text-purple-900 mb-2">Velocity Update</h4>
-                            <p className="text-xs text-purple-700">
-                                Particles move based on personal best, global best, and inertia
+                        <div className="p-4 bg-purple-50 rounded-lg border-2 border-purple-200">
+                            <div className="text-3xl mb-2">🚀</div>
+                            <h4 className="font-semibold text-purple-900 mb-2">3. Update Velocity</h4>
+                            <p className="text-xs text-purple-700 mb-2">
+                                <InlineMath math="v_i^{t+1} = w v_i^t + c_1 r_1 (p_i - x_i^t) + c_2 r_2 (g - x_i^t)" />
+                            </p>
+                        </div>
+
+                        <div className="p-4 bg-orange-50 rounded-lg border-2 border-orange-200">
+                            <div className="text-3xl mb-2">📍</div>
+                            <h4 className="font-semibold text-orange-900 mb-2">4. Update Position</h4>
+                            <p className="text-xs text-orange-700 mb-2">
+                                <InlineMath math="x_i^{t+1} = x_i^t + v_i^{t+1}" />
+                            </p>
+                            <p className="text-xs text-orange-600">
+                                Repeat steps 2-4
                             </p>
                         </div>
                     </div>
@@ -531,6 +711,10 @@ function ParticleSwarm() {
 function AntColony() {
     const [iteration, setIteration] = useState(0)
     const [numAnts, setNumAnts] = useState(20)
+    const [alpha, setAlpha] = useState(1.0) // Pheromone importance
+    const [beta, setBeta] = useState(2.0) // Heuristic importance
+    const [rho, setRho] = useState(0.5) // Evaporation rate
+    const [isRunning, setIsRunning] = useState(false)
 
     const cities = [
         { id: 'A', x: 2, y: 3 },
@@ -540,192 +724,700 @@ function AntColony() {
         { id: 'E', x: 1, y: 5 }
     ]
 
+    const runACO = () => {
+        setIsRunning(true)
+        setIteration(0)
+        const interval = setInterval(() => {
+            setIteration(i => {
+                if (i >= 50) {
+                    setIsRunning(false)
+                    clearInterval(interval)
+                    return 50
+                }
+                return i + 1
+            })
+        }, 100)
+    }
+
+    const bestPathLength = 15 + 10 * Math.exp(-iteration * 0.1)
+    const avgPathLength = 20 + 15 * Math.exp(-iteration * 0.08)
+
+    const pathData = Array.from({ length: iteration + 1 }, (_, i) => ({
+        iteration: i,
+        best: 15 + 10 * Math.exp(-i * 0.1),
+        average: 20 + 15 * Math.exp(-i * 0.08)
+    }))
+
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>🐜 Ant Colony Optimization: Following Pheromone Trails</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <p className="text-gray-600 mb-6">
-                    Like ants finding the shortest path to food! Ants leave pheromone trails,
-                    and stronger trails attract more ants. The shortest path gets reinforced!
-                </p>
+        <div className="space-y-6">
+            {/* Mathematical Foundation */}
+            <Card>
+                <CardHeader>
+                    <CardTitle>📐 Ant Colony Optimization Mathematics</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <div className="space-y-6">
+                        <div className="bg-blue-50 p-6 rounded-xl border-2 border-blue-200">
+                            <h3 className="text-lg font-bold text-blue-900 mb-4">Core ACO Equations</h3>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div>
-                        <h3 className="font-semibold mb-4">Colony Parameters</h3>
-                        <Slider
-                            label={`Number of Ants: ${numAnts}`}
-                            value={numAnts}
-                            onChange={setNumAnts}
-                            min={10}
-                            max={50}
-                            step={5}
-                        />
+                            <div className="space-y-4">
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">1. Transition Probability</p>
+                                    <BlockMath math="p_{ij}^k = \frac{[\tau_{ij}]^\alpha \cdot [\eta_{ij}]^\beta}{\sum_{l \in N_i^k} [\tau_{il}]^\alpha \cdot [\eta_{il}]^\beta}" />
+                                    <div className="mt-3 space-y-1 text-xs text-gray-700">
+                                        <p>• <InlineMath math="p_{ij}^k" /> = probability ant k moves from city i to city j</p>
+                                        <p>• <InlineMath math="\tau_{ij}" /> = pheromone level on edge (i,j)</p>
+                                        <p>• <InlineMath math="\eta_{ij} = 1/d_{ij}" /> = heuristic (inverse of distance)</p>
+                                        <p>• <InlineMath math="\alpha" /> = {alpha.toFixed(1)} (pheromone importance)</p>
+                                        <p>• <InlineMath math="\beta" /> = {beta.toFixed(1)} (heuristic importance)</p>
+                                        <p>• <InlineMath math="N_i^k" /> = feasible neighbors of city i for ant k</p>
+                                    </div>
+                                    <div className="mt-3 p-3 bg-blue-50 rounded">
+                                        <p className="text-xs font-semibold text-blue-900">Interpretation:</p>
+                                        <p className="text-xs text-blue-700">
+                                            Higher pheromone (<InlineMath math="\tau_{ij}" />) and shorter distance (higher <InlineMath math="\eta_{ij}" />)
+                                            increase probability of choosing edge (i,j)
+                                        </p>
+                                    </div>
+                                </div>
 
-                        <div className="mt-6 bg-gray-50 rounded-lg p-6 h-80">
-                            <svg viewBox="0 0 10 10" className="w-full h-full">
-                                {/* Draw paths between cities */}
-                                {cities.map((city, i) =>
-                                    cities.slice(i + 1).map((otherCity, j) => (
-                                        <line
-                                            key={`${i}-${j}`}
-                                            x1={city.x}
-                                            y1={city.y}
-                                            x2={otherCity.x}
-                                            y2={otherCity.y}
-                                            stroke="#ddd"
-                                            strokeWidth="0.05"
-                                        />
-                                    ))
-                                )}
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">2. Pheromone Update</p>
+                                    <BlockMath math="\tau_{ij}^{t+1} = (1-\rho) \cdot \tau_{ij}^t + \sum_{k=1}^{m} \Delta\tau_{ij}^k" />
+                                    <div className="mt-3 space-y-1 text-xs text-gray-700">
+                                        <p>• <InlineMath math="\rho" /> = {rho.toFixed(2)} (evaporation rate)</p>
+                                        <p>• <InlineMath math="(1-\rho) \cdot \tau_{ij}^t" /> = evaporation (forget old trails)</p>
+                                        <p>• <InlineMath math="\Delta\tau_{ij}^k" /> = pheromone deposited by ant k</p>
+                                        <p>• <InlineMath math="m" /> = {numAnts} (number of ants)</p>
+                                    </div>
+                                    <div className="mt-3 p-3 bg-green-50 rounded">
+                                        <p className="text-xs font-semibold text-green-900">Example:</p>
+                                        <p className="text-xs text-green-700">
+                                            If τ = 10, ρ = 0.5, Δτ = 2:<br />
+                                            τ_new = (1-0.5)×10 + 2 = 5 + 2 = 7
+                                        </p>
+                                    </div>
+                                </div>
 
-                                {/* Draw cities */}
-                                {cities.map((city) => (
-                                    <g key={city.id}>
-                                        <circle cx={city.x} cy={city.y} r="0.3" fill="#10b981" />
-                                        <text x={city.x} y={city.y - 0.5} fontSize="0.5" textAnchor="middle" fill="#000">
-                                            {city.id}
-                                        </text>
-                                    </g>
-                                ))}
-                            </svg>
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">3. Pheromone Deposit</p>
+                                    <BlockMath math="\Delta\tau_{ij}^k = \begin{cases} Q/L_k & \text{if ant } k \text{ uses edge } (i,j) \\ 0 & \text{otherwise} \end{cases}" />
+                                    <div className="mt-3 space-y-1 text-xs text-gray-700">
+                                        <p>• <InlineMath math="Q" /> = constant (typically 1 or 100)</p>
+                                        <p>• <InlineMath math="L_k" /> = total path length of ant k</p>
+                                        <p>• Shorter paths deposit more pheromone!</p>
+                                    </div>
+                                    <div className="mt-3 p-3 bg-purple-50 rounded">
+                                        <p className="text-xs font-semibold text-purple-900">Example:</p>
+                                        <p className="text-xs text-purple-700">
+                                            Ant 1: L = 20, Δτ = 100/20 = 5<br />
+                                            Ant 2: L = 10, Δτ = 100/10 = 10 (better path, more pheromone!)
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">4. Heuristic Information</p>
+                                    <BlockMath math="\eta_{ij} = \frac{1}{d_{ij}} = \frac{1}{\sqrt{(x_i-x_j)^2 + (y_i-y_j)^2}}" />
+                                    <p className="text-xs text-gray-600 mt-2">
+                                        Heuristic favors shorter edges (closer cities)
+                                    </p>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">5. Pheromone Bounds</p>
+                                    <BlockMath math="\tau_{min} \leq \tau_{ij} \leq \tau_{max}" />
+                                    <p className="text-xs text-gray-600 mt-2">
+                                        Prevent pheromone from becoming too small (stagnation) or too large (premature convergence)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-yellow-50 p-6 rounded-xl border-2 border-yellow-200">
+                            <h3 className="text-lg font-bold text-yellow-900 mb-4">💡 Parameter Tuning Guide</h3>
+                            <div className="space-y-3 text-sm text-yellow-800">
+                                <div className="flex items-start gap-3">
+                                    <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">α</div>
+                                    <div>
+                                        <p className="font-semibold">Pheromone Importance (α = {alpha.toFixed(1)})</p>
+                                        <p className="text-xs">High α: Follow pheromone trails more (exploitation)</p>
+                                        <p className="text-xs">Low α: More random exploration</p>
+                                        <p className="text-xs">Typical: 1.0</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-3">
+                                    <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">β</div>
+                                    <div>
+                                        <p className="font-semibold">Heuristic Importance (β = {beta.toFixed(1)})</p>
+                                        <p className="text-xs">High β: Prefer shorter edges (greedy)</p>
+                                        <p className="text-xs">Low β: Ignore distance information</p>
+                                        <p className="text-xs">Typical: 2.0-5.0</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-3">
+                                    <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">ρ</div>
+                                    <div>
+                                        <p className="font-semibold">Evaporation Rate (ρ = {rho.toFixed(2)})</p>
+                                        <p className="text-xs">High ρ (0.7-0.9): Forget quickly, more exploration</p>
+                                        <p className="text-xs">Low ρ (0.1-0.3): Remember longer, more exploitation</p>
+                                        <p className="text-xs">Typical: 0.5</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </CardContent>
+            </Card>
 
-                    <div>
-                        <h3 className="font-semibold mb-4">How ACO Works</h3>
-                        <div className="space-y-4">
-                            <div className="p-4 bg-blue-50 rounded-lg">
-                                <h4 className="font-semibold text-blue-900 mb-2">1. Ants Explore</h4>
-                                <p className="text-xs text-blue-700">
-                                    Each ant randomly constructs a solution (path through cities)
-                                </p>
+            {/* Interactive Simulation */}
+            <Card>
+                <CardHeader>
+                    <CardTitle>🐜 Interactive ACO Simulation</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <p className="text-gray-600 mb-6">
+                        Like ants finding the shortest path to food! Ants leave pheromone trails,
+                        and stronger trails attract more ants. The shortest path gets reinforced!
+                    </p>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <h3 className="font-semibold mb-4">Colony Parameters</h3>
+
+                            <div className="space-y-4 mb-6">
+                                <Slider
+                                    label={`Number of Ants: ${numAnts}`}
+                                    value={numAnts}
+                                    onChange={setNumAnts}
+                                    min={10}
+                                    max={50}
+                                    step={5}
+                                    description="Colony size"
+                                />
+                                <Slider
+                                    label={`Pheromone Importance (α): ${alpha.toFixed(1)}`}
+                                    value={alpha}
+                                    onChange={setAlpha}
+                                    min={0.5}
+                                    max={3.0}
+                                    step={0.1}
+                                    description="Weight of pheromone trails"
+                                />
+                                <Slider
+                                    label={`Heuristic Importance (β): ${beta.toFixed(1)}`}
+                                    value={beta}
+                                    onChange={setBeta}
+                                    min={1.0}
+                                    max={5.0}
+                                    step={0.5}
+                                    description="Weight of distance heuristic"
+                                />
+                                <Slider
+                                    label={`Evaporation Rate (ρ): ${rho.toFixed(2)}`}
+                                    value={rho}
+                                    onChange={setRho}
+                                    min={0.1}
+                                    max={0.9}
+                                    step={0.05}
+                                    description="Pheromone decay rate"
+                                />
                             </div>
 
-                            <div className="p-4 bg-green-50 rounded-lg">
-                                <h4 className="font-semibold text-green-900 mb-2">2. Deposit Pheromones</h4>
-                                <p className="text-xs text-green-700">
-                                    Shorter paths get more pheromone (inversely proportional to distance)
-                                </p>
+                            <div className="flex gap-3 mb-6">
+                                <Button
+                                    onClick={runACO}
+                                    disabled={isRunning}
+                                    className="flex-1 flex items-center justify-center gap-2"
+                                >
+                                    <Play className="w-4 h-4" />
+                                    {isRunning ? `Iteration ${iteration}` : 'Start Colony'}
+                                </Button>
+                                <Button
+                                    onClick={() => setIteration(0)}
+                                    variant="outline"
+                                    className="flex items-center gap-2"
+                                >
+                                    <RotateCcw className="w-4 h-4" />
+                                </Button>
                             </div>
 
-                            <div className="p-4 bg-purple-50 rounded-lg">
-                                <h4 className="font-semibold text-purple-900 mb-2">3. Evaporation</h4>
-                                <p className="text-xs text-purple-700">
-                                    Pheromones evaporate over time, preventing premature convergence
-                                </p>
+                            <div className="bg-gray-50 rounded-lg p-6 h-80">
+                                <svg viewBox="0 0 10 10" className="w-full h-full">
+                                    {/* Draw paths between cities */}
+                                    {cities.map((city, i) =>
+                                        cities.slice(i + 1).map((otherCity, j) => {
+                                            const pheromone = Math.max(0.05, 0.3 - iteration * 0.005)
+                                            return (
+                                                <line
+                                                    key={`${i}-${j}`}
+                                                    x1={city.x}
+                                                    y1={city.y}
+                                                    x2={otherCity.x}
+                                                    y2={otherCity.y}
+                                                    stroke="#10b981"
+                                                    strokeWidth={pheromone}
+                                                    opacity={0.3 + iteration * 0.01}
+                                                />
+                                            )
+                                        })
+                                    )}
+
+                                    {/* Draw cities */}
+                                    {cities.map((city) => (
+                                        <g key={city.id}>
+                                            <circle cx={city.x} cy={city.y} r="0.3" fill="#ef4444" />
+                                            <text x={city.x} y={city.y - 0.5} fontSize="0.5" textAnchor="middle" fill="#000" fontWeight="bold">
+                                                {city.id}
+                                            </text>
+                                        </g>
+                                    ))}
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 className="font-semibold mb-4">Path Length Evolution</h3>
+                            <ResponsiveContainer width="100%" height={300}>
+                                <LineChart data={pathData}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="iteration" label={{ value: 'Iteration (t)', position: 'insideBottom', offset: -5 }} />
+                                    <YAxis label={{ value: 'Path Length L', angle: -90, position: 'insideLeft' }} />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Line type="monotone" dataKey="best" stroke="#10b981" strokeWidth={2} name="Best Path" />
+                                    <Line type="monotone" dataKey="average" stroke="#3b82f6" strokeWidth={2} name="Average Path" />
+                                </LineChart>
+                            </ResponsiveContainer>
+
+                            <div className="mt-4 p-4 bg-green-50 rounded-lg">
+                                <h4 className="font-semibold text-green-900 mb-2">Colony Status</h4>
+                                <div className="text-sm text-green-700 space-y-1">
+                                    <p>Iteration t: {iteration}</p>
+                                    <p>Best Path Length: {bestPathLength.toFixed(2)}</p>
+                                    <p>Average Path Length: {avgPathLength.toFixed(2)}</p>
+                                    <p>Active Ants: {numAnts}</p>
+                                    <p>Parameters: α={alpha.toFixed(1)}, β={beta.toFixed(1)}, ρ={rho.toFixed(2)}</p>
+                                </div>
                             </div>
 
-                            <div className="p-4 bg-orange-50 rounded-lg">
-                                <h4 className="font-semibold text-orange-900 mb-2">4. Repeat</h4>
-                                <p className="text-xs text-orange-700">
-                                    New ants prefer paths with more pheromone, reinforcing good solutions
-                                </p>
+                            <div className="mt-4 p-4 bg-purple-50 rounded-lg">
+                                <h4 className="font-semibold text-purple-900 mb-2">📊 Probability Factors</h4>
+                                <div className="text-xs text-purple-700 space-y-2">
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-16 h-3 bg-blue-400 rounded"></div>
+                                        <span>Pheromone [τ]^α: {(alpha / (alpha + beta) * 100).toFixed(0)}%</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-16 h-3 bg-green-400 rounded"></div>
+                                        <span>Heuristic [η]^β: {(beta / (alpha + beta) * 100).toFixed(0)}%</span>
+                                    </div>
+                                    <p className="text-xs mt-2">
+                                        Balance determines exploration vs exploitation
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </CardContent>
-        </Card>
+                </CardContent>
+            </Card>
+
+            <Card>
+                <CardHeader>
+                    <CardTitle>🎯 ACO Algorithm Steps</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div className="p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+                            <div className="text-3xl mb-2">🎲</div>
+                            <h4 className="font-semibold text-blue-900 mb-2">1. Initialize</h4>
+                            <p className="text-xs text-blue-700 mb-2">
+                                Set initial pheromone <InlineMath math="\tau_{ij} = \tau_0" /> on all edges
+                            </p>
+                            <p className="text-xs text-blue-600">
+                                Place m = {numAnts} ants randomly
+                            </p>
+                        </div>
+
+                        <div className="p-4 bg-green-50 rounded-lg border-2 border-green-200">
+                            <div className="text-3xl mb-2">🚶</div>
+                            <h4 className="font-semibold text-green-900 mb-2">2. Construct Solutions</h4>
+                            <p className="text-xs text-green-700 mb-2">
+                                Each ant builds path using <InlineMath math="p_{ij}^k" />
+                            </p>
+                            <p className="text-xs text-green-600">
+                                Probability based on τ and η
+                            </p>
+                        </div>
+
+                        <div className="p-4 bg-purple-50 rounded-lg border-2 border-purple-200">
+                            <div className="text-3xl mb-2">💧</div>
+                            <h4 className="font-semibold text-purple-900 mb-2">3. Update Pheromone</h4>
+                            <p className="text-xs text-purple-700 mb-2">
+                                Evaporate: <InlineMath math="\tau \leftarrow (1-\rho)\tau" />
+                            </p>
+                            <p className="text-xs text-purple-600">
+                                Deposit: <InlineMath math="\tau \leftarrow \tau + \Delta\tau" />
+                            </p>
+                        </div>
+
+                        <div className="p-4 bg-orange-50 rounded-lg border-2 border-orange-200">
+                            <div className="text-3xl mb-2">🔄</div>
+                            <h4 className="font-semibold text-orange-900 mb-2">4. Repeat</h4>
+                            <p className="text-xs text-orange-700 mb-2">
+                                Continue until convergence or max iterations
+                            </p>
+                            <p className="text-xs text-orange-600">
+                                Best path emerges!
+                            </p>
+                        </div>
+                    </div>
+                </CardContent>
+            </Card>
+        </div>
     )
 }
 
 function SimulatedAnnealing() {
     const [temperature, setTemperature] = useState(100)
     const [coolingRate, setCoolingRate] = useState(0.95)
+    const [iteration, setIteration] = useState(0)
+    const [isRunning, setIsRunning] = useState(false)
 
-    const annealingData = Array.from({ length: 50 }, (_, i) => ({
+    const runSA = () => {
+        setIsRunning(true)
+        setIteration(0)
+        const interval = setInterval(() => {
+            setIteration(i => {
+                if (i >= 50) {
+                    setIsRunning(false)
+                    clearInterval(interval)
+                    return 50
+                }
+                return i + 1
+            })
+        }, 100)
+    }
+
+    const annealingData = Array.from({ length: Math.max(1, iteration + 1) }, (_, i) => ({
         iteration: i,
         temperature: temperature * Math.pow(coolingRate, i),
-        energy: 100 * Math.exp(-i * 0.1) + Math.random() * 10 * Math.exp(-i * 0.05)
+        energy: 100 * Math.exp(-i * 0.1) + Math.random() * 10 * Math.exp(-i * 0.05),
+        acceptanceProbability: Math.exp(-5 / (temperature * Math.pow(coolingRate, i)))
     }))
 
+    const currentTemp = temperature * Math.pow(coolingRate, iteration)
+    const currentEnergy = annealingData[iteration]?.energy || 100
+
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>🔥 Simulated Annealing: Cooling to Perfection</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <p className="text-gray-600 mb-6">
-                    Like cooling metal to make it stronger! Start hot (accept bad moves),
-                    gradually cool down (become more selective), until you reach the optimal state.
-                </p>
+        <div className="space-y-6">
+            {/* Mathematical Foundation */}
+            <Card>
+                <CardHeader>
+                    <CardTitle>📐 Simulated Annealing Mathematics</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <div className="space-y-6">
+                        <div className="bg-blue-50 p-6 rounded-xl border-2 border-blue-200">
+                            <h3 className="text-lg font-bold text-blue-900 mb-4">Core SA Equations</h3>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div>
-                        <h3 className="font-semibold mb-4">Annealing Parameters</h3>
+                            <div className="space-y-4">
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">1. Acceptance Probability (Metropolis Criterion)</p>
+                                    <BlockMath math="P(\text{accept}) = \begin{cases} 1 & \text{if } \Delta E \leq 0 \\ e^{-\Delta E / T} & \text{if } \Delta E > 0 \end{cases}" />
+                                    <div className="mt-3 space-y-1 text-xs text-gray-700">
+                                        <p>• <InlineMath math="\Delta E = E_{new} - E_{current}" /> = energy change</p>
+                                        <p>• <InlineMath math="T" /> = current temperature</p>
+                                        <p>• Always accept better solutions (<InlineMath math="\Delta E \leq 0" />)</p>
+                                        <p>• Sometimes accept worse solutions (<InlineMath math="\Delta E > 0" />)</p>
+                                    </div>
+                                    <div className="mt-3 p-3 bg-blue-50 rounded">
+                                        <p className="text-xs font-semibold text-blue-900">Example:</p>
+                                        <p className="text-xs text-blue-700">
+                                            ΔE = 5, T = 100: P = e^(-5/100) = 0.951 (95.1% accept)<br />
+                                            ΔE = 5, T = 10: P = e^(-5/10) = 0.606 (60.6% accept)<br />
+                                            ΔE = 5, T = 1: P = e^(-5/1) = 0.007 (0.7% accept)
+                                        </p>
+                                    </div>
+                                </div>
 
-                        <div className="space-y-4 mb-6">
-                            <Slider
-                                label={`Initial Temperature: ${temperature}`}
-                                value={temperature}
-                                onChange={setTemperature}
-                                min={50}
-                                max={200}
-                                step={10}
-                            />
-                            <Slider
-                                label={`Cooling Rate: ${coolingRate.toFixed(2)}`}
-                                value={coolingRate}
-                                onChange={setCoolingRate}
-                                min={0.8}
-                                max={0.99}
-                                step={0.01}
-                            />
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">2. Cooling Schedule (Geometric)</p>
+                                    <BlockMath math="T_{t+1} = \alpha \cdot T_t" />
+                                    <div className="mt-3 space-y-1 text-xs text-gray-700">
+                                        <p>• <InlineMath math="\alpha" /> = {coolingRate.toFixed(2)} (cooling rate)</p>
+                                        <p>• <InlineMath math="T_0" /> = {temperature} (initial temperature)</p>
+                                        <p>• <InlineMath math="T_t" /> = {currentTemp.toFixed(2)} (current temperature at iteration {iteration})</p>
+                                    </div>
+                                    <div className="mt-3 p-3 bg-green-50 rounded">
+                                        <p className="text-xs font-semibold text-green-900">Other Cooling Schedules:</p>
+                                        <p className="text-xs text-green-700">
+                                            • Linear: <InlineMath math="T_t = T_0 - \alpha t" /><br />
+                                            • Logarithmic: <InlineMath math="T_t = T_0 / \log(1 + t)" /><br />
+                                            • Exponential: <InlineMath math="T_t = T_0 \cdot \alpha^t" /> (used here)
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">3. Energy Function</p>
+                                    <BlockMath math="E(x) = f(x)" />
+                                    <p className="text-xs text-gray-600 mt-2">
+                                        Energy = objective function value. Goal: minimize E(x)
+                                    </p>
+                                    <div className="mt-3 p-3 bg-purple-50 rounded">
+                                        <p className="text-xs font-semibold text-purple-900">Examples:</p>
+                                        <p className="text-xs text-purple-700">
+                                            • TSP: E = total path length<br />
+                                            • Scheduling: E = total completion time<br />
+                                            • Function optimization: E = f(x)
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">4. Neighbor Generation</p>
+                                    <BlockMath math="x_{new} = N(x_{current})" />
+                                    <p className="text-xs text-gray-600 mt-2">
+                                        Generate neighbor solution by small perturbation
+                                    </p>
+                                    <div className="mt-3 p-3 bg-orange-50 rounded">
+                                        <p className="text-xs font-semibold text-orange-900">Examples:</p>
+                                        <p className="text-xs text-orange-700">
+                                            • Continuous: x_new = x + random(-δ, δ)<br />
+                                            • TSP: Swap two cities<br />
+                                            • Binary: Flip random bit
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">5. Boltzmann Distribution</p>
+                                    <BlockMath math="P(E) = \frac{e^{-E/T}}{\sum_i e^{-E_i/T}}" />
+                                    <p className="text-xs text-gray-600 mt-2">
+                                        At equilibrium, probability of state with energy E follows Boltzmann distribution
+                                    </p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div className="space-y-4">
-                            <div className="p-4 bg-red-50 rounded-lg">
-                                <h4 className="font-semibold text-red-900 mb-2">🔥 High Temperature</h4>
-                                <p className="text-xs text-red-700">
-                                    Accept worse solutions with high probability. Explore widely!
-                                </p>
-                            </div>
-
-                            <div className="p-4 bg-orange-50 rounded-lg">
-                                <h4 className="font-semibold text-orange-900 mb-2">🌡️ Medium Temperature</h4>
-                                <p className="text-xs text-orange-700">
-                                    Balance between exploration and exploitation
-                                </p>
-                            </div>
-
-                            <div className="p-4 bg-blue-50 rounded-lg">
-                                <h4 className="font-semibold text-blue-900 mb-2">❄️ Low Temperature</h4>
-                                <p className="text-xs text-blue-700">
-                                    Only accept better solutions. Fine-tune the result!
-                                </p>
+                        <div className="bg-yellow-50 p-6 rounded-xl border-2 border-yellow-200">
+                            <h3 className="text-lg font-bold text-yellow-900 mb-4">💡 Temperature Effects</h3>
+                            <div className="space-y-3 text-sm text-yellow-800">
+                                <div className="flex items-start gap-3">
+                                    <div className="w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">🔥</div>
+                                    <div>
+                                        <p className="font-semibold">High Temperature (T ≈ {temperature})</p>
+                                        <p className="text-xs">P(accept worse) ≈ 1 - Almost always accept</p>
+                                        <p className="text-xs">Behavior: Random search, high exploration</p>
+                                        <p className="text-xs">Purpose: Escape local minima</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-3">
+                                    <div className="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">🌡️</div>
+                                    <div>
+                                        <p className="font-semibold">Medium Temperature (T ≈ {(temperature / 2).toFixed(0)})</p>
+                                        <p className="text-xs">P(accept worse) ≈ 0.5 - Balanced acceptance</p>
+                                        <p className="text-xs">Behavior: Mix of exploration and exploitation</p>
+                                        <p className="text-xs">Purpose: Transition phase</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start gap-3">
+                                    <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">❄️</div>
+                                    <div>
+                                        <p className="font-semibold">Low Temperature (T ≈ 1)</p>
+                                        <p className="text-xs">P(accept worse) ≈ 0 - Rarely accept</p>
+                                        <p className="text-xs">Behavior: Greedy search, exploitation</p>
+                                        <p className="text-xs">Purpose: Fine-tune solution</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                </CardContent>
+            </Card>
 
-                    <div>
-                        <h3 className="font-semibold mb-4">Temperature & Energy Over Time</h3>
-                        <ResponsiveContainer width="100%" height={300}>
-                            <LineChart data={annealingData}>
-                                <CartesianGrid strokeDasharray="3 3" />
-                                <XAxis dataKey="iteration" />
-                                <YAxis />
-                                <Tooltip />
-                                <Legend />
-                                <Line type="monotone" dataKey="temperature" stroke="#ef4444" strokeWidth={2} name="Temperature" />
-                                <Line type="monotone" dataKey="energy" stroke="#3b82f6" strokeWidth={2} name="Energy" />
-                            </LineChart>
-                        </ResponsiveContainer>
+            {/* Interactive Simulation */}
+            <Card>
+                <CardHeader>
+                    <CardTitle>🔥 Interactive Simulated Annealing</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <p className="text-gray-600 mb-6">
+                        Like cooling metal to make it stronger! Start hot (accept bad moves),
+                        gradually cool down (become more selective), until you reach the optimal state.
+                    </p>
 
-                        <div className="mt-4 p-4 bg-purple-50 rounded-lg">
-                            <h4 className="font-semibold text-purple-900 mb-2">Acceptance Probability</h4>
-                            <p className="text-sm text-purple-700 mb-2">
-                                P(accept worse) = e^(-ΔE / T)
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <h3 className="font-semibold mb-4">Annealing Parameters</h3>
+
+                            <div className="space-y-4 mb-6">
+                                <Slider
+                                    label={`Initial Temperature (T₀): ${temperature}`}
+                                    value={temperature}
+                                    onChange={setTemperature}
+                                    min={50}
+                                    max={200}
+                                    step={10}
+                                    description="Starting temperature"
+                                />
+                                <Slider
+                                    label={`Cooling Rate (α): ${coolingRate.toFixed(2)}`}
+                                    value={coolingRate}
+                                    onChange={setCoolingRate}
+                                    min={0.8}
+                                    max={0.99}
+                                    step={0.01}
+                                    description="Temperature decay factor"
+                                />
+                            </div>
+
+                            <div className="flex gap-3 mb-6">
+                                <Button
+                                    onClick={runSA}
+                                    disabled={isRunning}
+                                    className="flex-1 flex items-center justify-center gap-2"
+                                >
+                                    <Play className="w-4 h-4" />
+                                    {isRunning ? `Iteration ${iteration}` : 'Start Annealing'}
+                                </Button>
+                                <Button
+                                    onClick={() => setIteration(0)}
+                                    variant="outline"
+                                    className="flex items-center gap-2"
+                                >
+                                    <RotateCcw className="w-4 h-4" />
+                                </Button>
+                            </div>
+
+                            <div className="space-y-4">
+                                <div className="p-4 bg-red-50 rounded-lg border-2 border-red-200">
+                                    <h4 className="font-semibold text-red-900 mb-2 flex items-center gap-2">
+                                        🔥 High Temperature Phase
+                                    </h4>
+                                    <p className="text-xs text-red-700 mb-2">
+                                        T &gt; {(temperature * 0.7).toFixed(0)}: Accept worse solutions with high probability
+                                    </p>
+                                    <p className="text-xs text-red-600">
+                                        P(ΔE=5) = e^(-5/{(temperature * 0.9).toFixed(0)}) = {Math.exp(-5 / (temperature * 0.9)).toFixed(3)}
+                                    </p>
+                                </div>
+
+                                <div className="p-4 bg-orange-50 rounded-lg border-2 border-orange-200">
+                                    <h4 className="font-semibold text-orange-900 mb-2 flex items-center gap-2">
+                                        🌡️ Medium Temperature Phase
+                                    </h4>
+                                    <p className="text-xs text-orange-700 mb-2">
+                                        {(temperature * 0.3).toFixed(0)} &lt; T &lt; {(temperature * 0.7).toFixed(0)}: Balanced exploration/exploitation
+                                    </p>
+                                    <p className="text-xs text-orange-600">
+                                        P(ΔE=5) = e^(-5/{(temperature * 0.5).toFixed(0)}) = {Math.exp(-5 / (temperature * 0.5)).toFixed(3)}
+                                    </p>
+                                </div>
+
+                                <div className="p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+                                    <h4 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
+                                        ❄️ Low Temperature Phase
+                                    </h4>
+                                    <p className="text-xs text-blue-700 mb-2">
+                                        T &lt; {(temperature * 0.3).toFixed(0)}: Only accept better solutions
+                                    </p>
+                                    <p className="text-xs text-blue-600">
+                                        P(ΔE=5) = e^(-5/{(temperature * 0.1).toFixed(0)}) = {Math.exp(-5 / (temperature * 0.1)).toFixed(3)}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 className="font-semibold mb-4">Temperature & Energy Evolution</h3>
+                            <ResponsiveContainer width="100%" height={300}>
+                                <LineChart data={annealingData}>
+                                    <CartesianGrid strokeDasharray="3 3" />
+                                    <XAxis dataKey="iteration" label={{ value: 'Iteration (t)', position: 'insideBottom', offset: -5 }} />
+                                    <YAxis label={{ value: 'Value', angle: -90, position: 'insideLeft' }} />
+                                    <Tooltip />
+                                    <Legend />
+                                    <Line type="monotone" dataKey="temperature" stroke="#ef4444" strokeWidth={2} name="Temperature T" />
+                                    <Line type="monotone" dataKey="energy" stroke="#3b82f6" strokeWidth={2} name="Energy E" />
+                                </LineChart>
+                            </ResponsiveContainer>
+
+                            <div className="mt-4 p-4 bg-purple-50 rounded-lg">
+                                <h4 className="font-semibold text-purple-900 mb-2">Current State</h4>
+                                <div className="text-sm text-purple-700 space-y-1">
+                                    <p>Iteration t: {iteration}</p>
+                                    <p>Temperature T: {currentTemp.toFixed(2)}</p>
+                                    <p>Energy E: {currentEnergy.toFixed(2)}</p>
+                                    <p>Cooling Rate α: {coolingRate.toFixed(2)}</p>
+                                    <p>Accept Prob (ΔE=5): {annealingData[iteration]?.acceptanceProbability.toFixed(3) || 1}</p>
+                                </div>
+                            </div>
+
+                            <div className="mt-4 p-4 bg-green-50 rounded-lg">
+                                <h4 className="font-semibold text-green-900 mb-2">📊 Acceptance Probability</h4>
+                                <div className="text-xs text-green-700">
+                                    <p className="mb-2">For ΔE = 5 at different temperatures:</p>
+                                    <div className="space-y-1 font-mono">
+                                        <p>T = 100: P = {Math.exp(-5 / 100).toFixed(3)} (95.1%)</p>
+                                        <p>T = 50: P = {Math.exp(-5 / 50).toFixed(3)} (90.5%)</p>
+                                        <p>T = 10: P = {Math.exp(-5 / 10).toFixed(3)} (60.7%)</p>
+                                        <p>T = 1: P = {Math.exp(-5 / 1).toFixed(3)} (0.7%)</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </CardContent>
+            </Card>
+
+            <Card>
+                <CardHeader>
+                    <CardTitle>🎯 SA Algorithm Steps</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div className="p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+                            <div className="text-3xl mb-2">🎲</div>
+                            <h4 className="font-semibold text-blue-900 mb-2">1. Initialize</h4>
+                            <p className="text-xs text-blue-700 mb-2">
+                                Random solution x, set T = T₀ = {temperature}
                             </p>
-                            <p className="text-xs text-purple-600">
-                                Where ΔE is energy increase and T is temperature.
-                                Higher T = more likely to accept worse solutions.
+                            <p className="text-xs text-blue-600">
+                                Calculate E(x)
+                            </p>
+                        </div>
+
+                        <div className="p-4 bg-green-50 rounded-lg border-2 border-green-200">
+                            <div className="text-3xl mb-2">🔄</div>
+                            <h4 className="font-semibold text-green-900 mb-2">2. Generate Neighbor</h4>
+                            <p className="text-xs text-green-700 mb-2">
+                                x_new = N(x), calculate ΔE = E(x_new) - E(x)
+                            </p>
+                        </div>
+
+                        <div className="p-4 bg-purple-50 rounded-lg border-2 border-purple-200">
+                            <div className="text-3xl mb-2">✅</div>
+                            <h4 className="font-semibold text-purple-900 mb-2">3. Accept/Reject</h4>
+                            <p className="text-xs text-purple-700 mb-2">
+                                If ΔE ≤ 0 or rand() &lt; e^(-ΔE/T): accept x_new
+                            </p>
+                        </div>
+
+                        <div className="p-4 bg-orange-50 rounded-lg border-2 border-orange-200">
+                            <div className="text-3xl mb-2">❄️</div>
+                            <h4 className="font-semibold text-orange-900 mb-2">4. Cool Down</h4>
+                            <p className="text-xs text-orange-700 mb-2">
+                                T = α × T = {coolingRate.toFixed(2)} × T
+                            </p>
+                            <p className="text-xs text-orange-600">
+                                Repeat 2-4
                             </p>
                         </div>
                     </div>
-                </div>
-            </CardContent>
-        </Card>
+                </CardContent>
+            </Card>
+        </div>
     )
 }
