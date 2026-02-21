@@ -1,24 +1,45 @@
-# AI Virtual Lab - CNN & SVM Interactive Learning Platform
+# AI Virtual Lab - Comprehensive Machine Learning Education Platform
 
-A professional educational web application designed to help students understand Convolutional Neural Networks (CNNs) and Support Vector Machines (SVMs) through experiential learning, aligned with NEP 2020 principles.
+A professional educational web application designed to help students understand Machine Learning algorithms through experiential learning, aligned with NEP 2020 principles.
 
 ## 🎯 Overview
 
-This platform provides two comprehensive virtual labs:
+This platform provides five comprehensive virtual labs covering essential ML algorithms:
 
-### CNN Virtual Lab
+### 🧠 CNN Virtual Lab
 - Layer-by-layer visualization of neural network operations
 - Interactive convolution, pooling, and activation modules
+- Plant disease detection with real images
 - Mathematical equations with real-time interpretation
-- Synthetic image generation and manipulation
-- Step-by-step Python code demonstrations
+- Step-by-step processing visualization
 
-### SVM Virtual Lab
+### 📊 SVM Virtual Lab
 - Dataset playground with multiple patterns (linear, moon, circular)
 - Kernel experimentation (Linear, Polynomial, RBF)
 - Hyperparameter tuning with live visualization
 - Training process animation
 - Comprehensive evaluation metrics dashboard
+
+### 🌳 Decision Tree Virtual Lab
+- Animated tree growth visualization
+- Splitting criteria comparison (Gini vs Entropy)
+- Pre-pruning and post-pruning techniques
+- Interactive tree builder
+- Overfitting prevention strategies
+
+### 🎲 Naive Bayes Virtual Lab
+- Bayes' theorem interactive explanation
+- Medical test probability calculator
+- Text classification (spam detection)
+- Conditional probability visualization
+- Independence assumption analysis
+
+### 🌲 Random Forest Virtual Lab
+- Forest visualization with multiple trees
+- Bootstrapping demonstration
+- Majority voting mechanism
+- Feature importance rankings
+- Ensemble learning principles
 
 ## 🚀 Features
 
@@ -63,34 +84,50 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ```
 ai-virtual-lab/
 ├── app/
-│   ├── page.tsx              # Home page
-│   ├── cnn/
-│   │   └── page.tsx          # CNN Virtual Lab
-│   ├── svm/
-│   │   └── page.tsx          # SVM Virtual Lab
+│   ├── page.tsx                    # Home page
+│   ├── cnn/page.tsx                # CNN Virtual Lab
+│   ├── svm/page.tsx                # SVM Virtual Lab
+│   ├── decision-tree/page.tsx      # Decision Tree Lab
+│   ├── naive-bayes/page.tsx        # Naive Bayes Lab
+│   ├── random-forest/page.tsx      # Random Forest Lab
 │   ├── layout.tsx
 │   └── globals.css
 ├── components/
-│   ├── ui/                   # Reusable UI components
+│   ├── ui/                         # Reusable UI components
 │   │   ├── button.tsx
 │   │   ├── card.tsx
 │   │   ├── slider.tsx
 │   │   └── tabs.tsx
-│   ├── cnn/                  # CNN modules
-│   │   ├── CNNTaskSelector.tsx
+│   ├── cnn/                        # CNN modules
+│   │   ├── PlantDiseaseModule.tsx
 │   │   ├── ConvolutionModule.tsx
 │   │   ├── PoolingModule.tsx
 │   │   ├── ActivationModule.tsx
 │   │   └── FullyConnectedModule.tsx
-│   └── svm/                  # SVM modules
-│       ├── SVMTaskSelector.tsx
-│       ├── DatasetPlayground.tsx
-│       ├── KernelLab.tsx
-│       ├── TrainingVisualization.tsx
-│       └── EvaluationDashboard.tsx
+│   ├── svm/                        # SVM modules
+│   │   ├── DatasetPlayground.tsx
+│   │   ├── KernelLab.tsx
+│   │   ├── TrainingVisualization.tsx
+│   │   └── EvaluationDashboard.tsx
+│   ├── decision-tree/              # Decision Tree modules
+│   │   ├── TreeVisualization.tsx
+│   │   ├── SplittingCriteria.tsx
+│   │   ├── PruningModule.tsx
+│   │   └── InteractiveBuilder.tsx
+│   ├── naive-bayes/                # Naive Bayes modules
+│   │   ├── BayesTheorem.tsx
+│   │   ├── ProbabilityCalculator.tsx
+│   │   ├── TextClassification.tsx
+│   │   └── ConditionalProbability.tsx
+│   └── random-forest/              # Random Forest modules
+│       ├── ForestVisualization.tsx
+│       ├── BootstrappingModule.tsx
+│       ├── VotingMechanism.tsx
+│       └── FeatureImportance.tsx
 ├── lib/
-│   └── utils.ts              # Utility functions
-├── public/                   # Static assets
+│   ├── utils.ts                    # Utility functions
+│   └── sampleImages.ts             # Plant disease samples
+├── public/                         # Static assets
 ├── package.json
 ├── tsconfig.json
 ├── tailwind.config.js
@@ -180,30 +217,31 @@ No environment variables are required for the basic deployment. The application 
 
 ## 📚 Usage Guide
 
-### CNN Virtual Lab
+### 🧠 CNN Virtual Lab
 
-1. **Convolution Operation**
+1. **Plant Disease Detection**
+   - Upload leaf images or use sample images
+   - See layer-by-layer CNN processing
+   - Get disease predictions with confidence scores
+   - Understand feature extraction
+
+2. **Convolution Operation**
    - View input image, kernel, and output feature map
    - Animate the convolution process step-by-step
    - Adjust stride and padding parameters
    - See mathematical formula with real values
 
-2. **Pooling Operation**
+3. **Pooling Operation**
    - Compare Max Pooling vs Average Pooling
    - Observe spatial dimension reduction
    - Understand feature preservation
 
-3. **Activation Functions**
+4. **Activation Functions**
    - Experiment with ReLU, Sigmoid, and Tanh
    - View function graphs and transformations
    - Understand non-linearity importance
 
-4. **Fully Connected Layer**
-   - See how features combine for classification
-   - View weight matrix operations
-   - Understand softmax probability output
-
-### SVM Virtual Lab
+### 📊 SVM Virtual Lab
 
 1. **Dataset Playground**
    - Generate different dataset patterns
@@ -214,19 +252,81 @@ No environment variables are required for the basic deployment. The application 
    - Experiment with Linear, Polynomial, and RBF kernels
    - Tune C (regularization) parameter
    - Adjust gamma for kernel functions
-   - See mathematical formulas
 
 3. **Training Visualization**
    - Watch step-by-step training process
    - Understand kernel mapping
    - See support vector selection
-   - View final hyperplane formation
 
 4. **Evaluation Dashboard**
    - View accuracy, precision, recall, F1-score
    - Analyze confusion matrix
-   - Understand metric interpretations
-   - See formula breakdowns
+
+### 🌳 Decision Tree Virtual Lab
+
+1. **Tree Visualization**
+   - Watch animated tree growth
+   - See node splitting decisions
+   - Understand Gini impurity
+
+2. **Splitting Criteria**
+   - Compare Gini vs Entropy
+   - Calculate information gain
+   - Choose optimal splits
+
+3. **Pruning**
+   - Pre-pruning (early stopping)
+   - Post-pruning (cost complexity)
+   - Prevent overfitting
+
+4. **Interactive Builder**
+   - Build custom decision trees
+   - Add/edit training data
+   - Test predictions
+
+### 🎲 Naive Bayes Virtual Lab
+
+1. **Bayes' Theorem**
+   - Interactive medical test example
+   - Adjust prior probabilities
+   - See posterior calculations
+
+2. **Probability Calculator**
+   - Calculate conditional probabilities
+   - Tennis playing prediction
+   - Step-by-step computation
+
+3. **Text Classification**
+   - Spam vs Ham detection
+   - Real-time classification
+   - Probability visualization
+
+4. **Conditional Probability**
+   - Independence assumption
+   - Advantages and limitations
+   - When to use Naive Bayes
+
+### 🌲 Random Forest Virtual Lab
+
+1. **Forest Visualization**
+   - See multiple trees working together
+   - Majority voting in action
+   - Adjust number of trees
+
+2. **Bootstrapping**
+   - Random sampling with replacement
+   - Create diverse training sets
+   - Out-of-bag samples
+
+3. **Voting Mechanism**
+   - Classification voting
+   - Confidence levels
+   - Ensemble predictions
+
+4. **Feature Importance**
+   - Rank features by importance
+   - Understand contribution
+   - Feature selection insights
 
 ## 🎓 Pedagogical Features
 
@@ -257,7 +357,7 @@ No environment variables are required for the basic deployment. The application 
 - Pooling for dimensionality reduction
 - Activation functions and non-linearity
 - Fully connected layers for classification
-- Softmax for probability distribution
+- Real-world application (plant disease detection)
 
 ### SVM Topics
 - Linear vs non-linear separability
@@ -266,7 +366,30 @@ No environment variables are required for the basic deployment. The application 
 - Hyperparameter tuning (C, gamma, degree)
 - Decision boundaries
 - Classification metrics
-- Confusion matrix analysis
+
+### Decision Tree Topics
+- Tree construction algorithms
+- Splitting criteria (Gini impurity, Entropy)
+- Information gain calculation
+- Pruning techniques (pre and post)
+- Overfitting prevention
+- Tree depth and complexity
+
+### Naive Bayes Topics
+- Bayes' theorem fundamentals
+- Prior, likelihood, and posterior probabilities
+- Conditional independence assumption
+- Text classification applications
+- Probability calculations
+- When to use probabilistic classifiers
+
+### Random Forest Topics
+- Ensemble learning principles
+- Bootstrap aggregating (bagging)
+- Random feature selection
+- Majority voting mechanism
+- Feature importance calculation
+- Bias-variance tradeoff
 
 ## 🚀 Performance Optimization
 
@@ -309,33 +432,33 @@ npm install typescript@latest
 ## 🔮 Future Extensions
 
 ### Planned Features
-1. **CNN Enhancements**
-   - Custom image upload
-   - More layer types (Batch Norm, Dropout)
-   - Full network builder
-   - Transfer learning demo
-   - Real dataset integration
+1. **Additional ML Algorithms**
+   - K-Nearest Neighbors (KNN)
+   - Logistic Regression
+   - Neural Network Builder
+   - Gradient Boosting
+   - Principal Component Analysis (PCA)
 
-2. **SVM Enhancements**
-   - Multi-class classification
-   - SVM regression (SVR)
-   - Cross-validation visualization
-   - ROC curve analysis
-   - Feature importance
-
-3. **General Improvements**
-   - User progress tracking
-   - Quiz system with scoring
-   - Export experiment reports
+2. **Enhanced Interactivity**
+   - Custom dataset upload
+   - Model comparison tools
+   - Performance benchmarking
+   - Export trained models
    - Collaborative learning features
-   - Mobile app version
 
-### Additional ML Topics
-- Decision Trees
-- Random Forests
-- Neural Network Architectures
-- Gradient Descent Visualization
-- Backpropagation Animation
+3. **Advanced Visualizations**
+   - 3D decision boundaries
+   - Real-time training curves
+   - Confusion matrix heatmaps
+   - ROC and AUC curves
+   - Learning rate schedulers
+
+4. **Educational Tools**
+   - Quiz system with scoring
+   - Progress tracking
+   - Certificate generation
+   - Video tutorials
+   - Code export functionality
 
 ## 📄 License
 
