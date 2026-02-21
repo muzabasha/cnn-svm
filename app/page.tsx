@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Brain, Network, TreeDeciduous, Calculator, Trees } from 'lucide-react'
+import { Brain, Network, TreeDeciduous, Calculator, Trees, User } from 'lucide-react'
 
 export default function Home() {
     return (
@@ -15,6 +15,14 @@ export default function Home() {
                     <p className="text-sm text-gray-500 mt-2">
                         Aligned with NEP 2020 Principles
                     </p>
+                    <div className="mt-6">
+                        <Link href="/profile">
+                            <button className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl mx-auto">
+                                <User className="w-5 h-5" />
+                                About the Creator
+                            </button>
+                        </Link>
+                    </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
