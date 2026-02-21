@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Brain, Network, TreeDeciduous, Calculator, Trees, User } from 'lucide-react'
+import { Brain, Network, TreeDeciduous, Calculator, Trees, User, TrendingUp, Users, Target, BarChart3 } from 'lucide-react'
 
 export default function Home() {
     return (
@@ -122,6 +122,86 @@ export default function Home() {
                                 <li>✓ Bootstrapping explained</li>
                                 <li>✓ Voting mechanism</li>
                                 <li>✓ Feature importance</li>
+                            </ul>
+                        </div>
+                    </Link>
+
+                    <Link href="/logistic-regression">
+                        <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all cursor-pointer group active:scale-98">
+                            <div className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-purple-100 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
+                                <TrendingUp className="w-7 h-7 sm:w-8 sm:h-8 text-purple-600" />
+                            </div>
+                            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
+                                Logistic Regression Lab
+                            </h2>
+                            <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
+                                Master binary and multiclass classification
+                            </p>
+                            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-500">
+                                <li>✓ Sigmoid function visualization</li>
+                                <li>✓ Decision boundary exploration</li>
+                                <li>✓ Cost function optimization</li>
+                                <li>✓ Multiclass classification</li>
+                            </ul>
+                        </div>
+                    </Link>
+
+                    <Link href="/knn">
+                        <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all cursor-pointer group active:scale-98">
+                            <div className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-green-100 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
+                                <Users className="w-7 h-7 sm:w-8 sm:h-8 text-green-600" />
+                            </div>
+                            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
+                                K-Nearest Neighbors Lab
+                            </h2>
+                            <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
+                                Understand instance-based learning
+                            </p>
+                            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-500">
+                                <li>✓ Distance metrics comparison</li>
+                                <li>✓ K-value impact analysis</li>
+                                <li>✓ Weighted voting mechanisms</li>
+                                <li>✓ Interactive classifier</li>
+                            </ul>
+                        </div>
+                    </Link>
+
+                    <Link href="/kmeans">
+                        <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all cursor-pointer group active:scale-98">
+                            <div className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-cyan-100 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
+                                <Target className="w-7 h-7 sm:w-8 sm:h-8 text-cyan-600" />
+                            </div>
+                            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
+                                K-Means Clustering Lab
+                            </h2>
+                            <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
+                                Explore unsupervised learning
+                            </p>
+                            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-500">
+                                <li>✓ Clustering visualization</li>
+                                <li>✓ Centroid evolution tracking</li>
+                                <li>✓ Elbow method for optimal K</li>
+                                <li>✓ Initialization strategies</li>
+                            </ul>
+                        </div>
+                    </Link>
+
+                    <Link href="/multiple-regression">
+                        <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all cursor-pointer group active:scale-98">
+                            <div className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-orange-100 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
+                                <BarChart3 className="w-7 h-7 sm:w-8 sm:h-8 text-orange-600" />
+                            </div>
+                            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
+                                Multiple Regression Lab
+                            </h2>
+                            <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
+                                Master multivariate regression
+                            </p>
+                            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-500">
+                                <li>✓ Multiple features modeling</li>
+                                <li>✓ Feature scaling techniques</li>
+                                <li>✓ Polynomial features</li>
+                                <li>✓ Regularization (Ridge, Lasso)</li>
                             </ul>
                         </div>
                     </Link>
