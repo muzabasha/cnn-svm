@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Slider } from '@/components/ui/slider'
@@ -74,15 +74,15 @@ export function DatasetPlayground() {
         return points
     }
 
-    const generateData = () => {
+    const generateData = useCallback(() => {
         if (datasetType === 'linear') return generateLinearData()
         if (datasetType === 'moon') return generateMoonData()
         return generateCircularData()
-    }
+    }, [datasetType, noise, numSamples])
 
     useEffect(() => {
         setData(generateData())
-    }, [datasetType, noise, numSamples])
+    }, [generateData])
 
     const class0 = data.filter(d => d.label === 0)
     const class1 = data.filter(d => d.label === 1)
@@ -111,8 +111,8 @@ export function DatasetPlayground() {
                                         <button
                                             onClick={() => setDatasetType('linear')}
                                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${datasetType === 'linear'
-                                                    ? 'bg-purple-600 text-white'
-                                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                                ? 'bg-purple-600 text-white'
+                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                                 }`}
                                         >
                                             Linear
@@ -120,8 +120,8 @@ export function DatasetPlayground() {
                                         <button
                                             onClick={() => setDatasetType('moon')}
                                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${datasetType === 'moon'
-                                                    ? 'bg-purple-600 text-white'
-                                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                                ? 'bg-purple-600 text-white'
+                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                                 }`}
                                         >
                                             Moon
@@ -129,8 +129,8 @@ export function DatasetPlayground() {
                                         <button
                                             onClick={() => setDatasetType('circular')}
                                             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${datasetType === 'circular'
-                                                    ? 'bg-purple-600 text-white'
-                                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                                ? 'bg-purple-600 text-white'
+                                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                                 }`}
                                         >
                                             Circular

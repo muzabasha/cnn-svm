@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
@@ -23,7 +23,7 @@ export function PoolingModule() {
     const [currentStep, setCurrentStep] = useState(0)
     const [isAnimating, setIsAnimating] = useState(false)
 
-    const computePooling = () => {
+    const computePooling = useCallback(() => {
         const outputSize = Math.floor(input.length / poolSize)
         const result: number[][] = []
 
@@ -40,11 +40,11 @@ export function PoolingModule() {
             }
         }
         setOutput(result)
-    }
+    }, [input, poolType, poolSize])
 
     useEffect(() => {
         computePooling()
-    }, [input, poolType, poolSize])
+    }, [computePooling])
 
     const animate = () => {
         setIsAnimating(true)

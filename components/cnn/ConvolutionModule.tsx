@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
@@ -31,7 +31,19 @@ export function ConvolutionModule() {
     const [stride, setStride] = useState(1)
     const [padding, setPadding] = useState(0)
 
-    const computeConvolution = () => {
+    const addPadding = (img: number[][], pad: number): number[][] => {
+        if (pad === 0) return img
+        const newSize = img.length + 2 * pad
+        const padded: number[][] = Array(newSize).fill(0).map(() => Array(newSize).fill(0))
+        for (let i = 0; i < img.length; i++) {
+            for (let j = 0; j < img[0].length; j++) {
+                padded[i + pad][j + pad] = img[i][j]
+            }
+        }
+        return padded
+    }
+
+    const computeConvolution = useCallback(() => {
         const paddedImage = addPadding(image, padding)
         const outputSize = Math.floor((paddedImage.length - kernel.length) / stride) + 1
         const result: number[][] = []
@@ -49,23 +61,11 @@ export function ConvolutionModule() {
             }
         }
         setOutput(result)
-    }
-
-    const addPadding = (img: number[][], pad: number): number[][] => {
-        if (pad === 0) return img
-        const newSize = img.length + 2 * pad
-        const padded: number[][] = Array(newSize).fill(0).map(() => Array(newSize).fill(0))
-        for (let i = 0; i < img.length; i++) {
-            for (let j = 0; j < img[0].length; j++) {
-                padded[i + pad][j + pad] = img[i][j]
-            }
-        }
-        return padded
-    }
+    }, [image, kernel, stride, padding])
 
     useEffect(() => {
         computeConvolution()
-    }, [image, kernel, stride, padding])
+    }, [computeConvolution])
 
     const animate = () => {
         setIsAnimating(true)
