@@ -6,11 +6,11 @@ import { GraduationCap, BookOpen, Award, Users, FileText, TrendingUp, ExternalLi
 export default function ProfilePage() {
     const stats = [
         { label: 'Publications', value: '85+', icon: FileText, color: 'bg-blue-500' },
-        { label: 'Citations', value: '1,200+', icon: TrendingUp, color: 'bg-green-500' },
-        { label: 'H-Index', value: '17', icon: Award, color: 'bg-purple-500' },
+        { label: 'Citations', value: '2,187', icon: TrendingUp, color: 'bg-green-500' },
+        { label: 'H-Index', value: '27', icon: Award, color: 'bg-purple-500' },
+        { label: 'i10-Index', value: '50', icon: Award, color: 'bg-indigo-500' },
         { label: 'Patents', value: '10+', icon: BookOpen, color: 'bg-orange-500' },
-        { label: 'Books & Chapters', value: '20+', icon: BookOpen, color: 'bg-teal-500' },
-        { label: 'Students Mentored', value: '500+', icon: Users, color: 'bg-pink-500' }
+        { label: 'Books & Chapters', value: '20+', icon: BookOpen, color: 'bg-teal-500' }
     ]
 
     const researchAreas = [
@@ -74,7 +74,7 @@ export default function ProfilePage() {
                             </p>
                             <p className="text-gray-600 mb-6 max-w-3xl">
                                 Leading researcher and educator in Artificial Intelligence, Machine Learning, and Deep Learning
-                                with 85+ publications, 10+ patents, and a passion for innovative educational technology.
+                                with 85+ publications, 2,187 citations (H-index: 27), 10+ patents, and a passion for innovative educational technology.
                                 Committed to advancing AI education through experiential learning platforms.
                             </p>
 
@@ -204,19 +204,27 @@ export default function ProfilePage() {
                             <div className="space-y-4">
                                 <div className="flex justify-between items-center p-3 bg-green-50 rounded-lg">
                                     <span className="text-gray-700">Total Citations</span>
-                                    <span className="text-2xl font-bold text-green-600">1,200+</span>
+                                    <span className="text-2xl font-bold text-green-600">2,187</span>
                                 </div>
                                 <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
-                                    <span className="text-gray-700">H-Index</span>
-                                    <span className="text-2xl font-bold text-blue-600">17</span>
+                                    <span className="text-gray-700">Citations (Since 2021)</span>
+                                    <span className="text-2xl font-bold text-blue-600">1,854</span>
                                 </div>
                                 <div className="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
+                                    <span className="text-gray-700">H-Index</span>
+                                    <span className="text-2xl font-bold text-purple-600">27</span>
+                                </div>
+                                <div className="flex justify-between items-center p-3 bg-indigo-50 rounded-lg">
+                                    <span className="text-gray-700">H-Index (Since 2021)</span>
+                                    <span className="text-2xl font-bold text-indigo-600">23</span>
+                                </div>
+                                <div className="flex justify-between items-center p-3 bg-pink-50 rounded-lg">
                                     <span className="text-gray-700">i10-Index</span>
-                                    <span className="text-2xl font-bold text-purple-600">20</span>
+                                    <span className="text-2xl font-bold text-pink-600">50</span>
                                 </div>
                                 <div className="flex justify-between items-center p-3 bg-orange-50 rounded-lg">
-                                    <span className="text-gray-700">Publications (Since 2018)</span>
-                                    <span className="text-2xl font-bold text-orange-600">884</span>
+                                    <span className="text-gray-700">i10-Index (Since 2021)</span>
+                                    <span className="text-2xl font-bold text-orange-600">43</span>
                                 </div>
                             </div>
                         </CardContent>
