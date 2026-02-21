@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Brain, Network, TreeDeciduous, Calculator, Trees, User, TrendingUp, Users, Target, BarChart3, MessageSquare, Zap, GitBranch } from 'lucide-react'
+import { Brain, Network, TreeDeciduous, Calculator, Trees, User, TrendingUp, Users, Target, BarChart3, MessageSquare, Zap, GitBranch, Layers } from 'lucide-react'
 
 export default function Home() {
     return (
@@ -262,6 +262,26 @@ export default function Home() {
                                 <li>✓ LSTM & GRU architectures</li>
                                 <li>✓ Vanishing gradient problem</li>
                                 <li>✓ Time series prediction</li>
+                            </ul>
+                        </div>
+                    </Link>
+
+                    <Link href="/dnn">
+                        <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all cursor-pointer group active:scale-98">
+                            <div className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-emerald-100 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
+                                <Layers className="w-7 h-7 sm:w-8 sm:h-8 text-emerald-600" />
+                            </div>
+                            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
+                                Deep Neural Networks Lab
+                            </h2>
+                            <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
+                                Build and experiment with deep architectures
+                            </p>
+                            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-500">
+                                <li>✓ Interactive network builder</li>
+                                <li>✓ Layer visualization & data flow</li>
+                                <li>✓ Dropout & batch normalization</li>
+                                <li>✓ Overfitting & regularization</li>
                             </ul>
                         </div>
                     </Link>
