@@ -6,6 +6,8 @@ import { Slider } from '@/components/ui/slider'
 import { Button } from '@/components/ui/button'
 import { Play, RotateCcw } from 'lucide-react'
 import { LineChart, Line, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { BlockMath, InlineMath } from 'react-katex'
+import 'katex/dist/katex.min.css'
 
 export default function BioInspiredPage() {
     const [selectedAlgorithm, setSelectedAlgorithm] = useState('ga')
@@ -50,8 +52,8 @@ export default function BioInspiredPage() {
                             key={algo.id}
                             onClick={() => setSelectedAlgorithm(algo.id)}
                             className={`p-4 rounded-xl border-2 transition-all ${selectedAlgorithm === algo.id
-                                    ? 'border-green-500 bg-green-50 shadow-lg'
-                                    : 'border-gray-200 bg-white hover:bg-gray-50'
+                                ? 'border-green-500 bg-green-50 shadow-lg'
+                                : 'border-gray-200 bg-white hover:bg-gray-50'
                                 }`}
                         >
                             <div className="text-3xl mb-2">{algo.icon}</div>
@@ -72,6 +74,7 @@ function GeneticAlgorithm() {
     const [generation, setGeneration] = useState(0)
     const [populationSize, setPopulationSize] = useState(20)
     const [mutationRate, setMutationRate] = useState(0.1)
+    const [crossoverRate, setCrossoverRate] = useState(0.8)
     const [isRunning, setIsRunning] = useState(false)
 
     const runEvolution = () => {
@@ -104,9 +107,109 @@ function GeneticAlgorithm() {
 
     return (
         <div className="space-y-6">
+            {/* Mathematical Foundation */}
             <Card>
                 <CardHeader>
-                    <CardTitle>🧬 Genetic Algorithm: Evolution in Action</CardTitle>
+                    <CardTitle>📐 Genetic Algorithm Mathematics</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <div className="space-y-6">
+                        <div className="bg-blue-50 p-6 rounded-xl border-2 border-blue-200">
+                            <h3 className="text-lg font-bold text-blue-900 mb-4">Core Formulas</h3>
+
+                            <div className="space-y-4">
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">1. Fitness Function</p>
+                                    <BlockMath math="f(x) = \text{objective}(x)" />
+                                    <p className="text-xs text-gray-600 mt-2">
+                                        Measures solution quality. Higher fitness = better solution.
+                                    </p>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">2. Selection Probability (Roulette Wheel)</p>
+                                    <BlockMath math="P(x_i) = \frac{f(x_i)}{\sum_{j=1}^{n} f(x_j)}" />
+                                    <p className="text-xs text-gray-600 mt-2">
+                                        Probability of selecting individual <InlineMath math="x_i" /> is proportional to its fitness.
+                                    </p>
+                                    <div className="mt-3 p-3 bg-blue-50 rounded">
+                                        <p className="text-xs font-semibold text-blue-900">Example:</p>
+                                        <p className="text-xs text-blue-700">
+                                            If fitness values are [10, 20, 30], probabilities are [16.7%, 33.3%, 50%]
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">3. Crossover (Single-Point)</p>
+                                    <BlockMath math="\text{child} = \text{parent}_1[0:k] + \text{parent}_2[k:n]" />
+                                    <p className="text-xs text-gray-600 mt-2">
+                                        Combine genetic material at crossover point <InlineMath math="k" />
+                                    </p>
+                                    <div className="mt-3 p-3 bg-green-50 rounded">
+                                        <p className="text-xs font-semibold text-green-900">Example:</p>
+                                        <p className="text-xs text-green-700 font-mono">
+                                            Parent 1: 11001010<br />
+                                            Parent 2: 00110101<br />
+                                            Child: 1100<span className="text-purple-700">0101</span> (crossover at position 4)
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">4. Mutation</p>
+                                    <BlockMath math="x_i' = \begin{cases} x_i & \text{with probability } 1-p_m \\ \neg x_i & \text{with probability } p_m \end{cases}" />
+                                    <p className="text-xs text-gray-600 mt-2">
+                                        Flip bits with mutation probability <InlineMath math="p_m" /> = {(mutationRate * 100).toFixed(0)}%
+                                    </p>
+                                    <div className="mt-3 p-3 bg-orange-50 rounded">
+                                        <p className="text-xs font-semibold text-orange-900">Example:</p>
+                                        <p className="text-xs text-orange-700 font-mono">
+                                            Before: 11001010<br />
+                                            After:  110<span className="text-red-700">1</span>1010 (bit 3 mutated)
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white p-4 rounded-lg">
+                                    <p className="text-sm font-semibold text-gray-900 mb-2">5. Average Fitness Evolution</p>
+                                    <BlockMath math="\bar{f}(t) = \frac{1}{N}\sum_{i=1}^{N} f(x_i^{(t)})" />
+                                    <p className="text-xs text-gray-600 mt-2">
+                                        Average fitness at generation <InlineMath math="t" /> with population size <InlineMath math="N" />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-yellow-50 p-6 rounded-xl border-2 border-yellow-200">
+                            <h3 className="text-lg font-bold text-yellow-900 mb-4">💡 How It Works Together</h3>
+                            <div className="space-y-3 text-sm text-yellow-800">
+                                <div className="flex items-start gap-3">
+                                    <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">1</div>
+                                    <p><strong>Selection:</strong> Better solutions (higher <InlineMath math="f(x)" />) have higher <InlineMath math="P(x)" />, more likely to reproduce</p>
+                                </div>
+                                <div className="flex items-start gap-3">
+                                    <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">2</div>
+                                    <p><strong>Crossover:</strong> Combines good traits from parents (rate = {(crossoverRate * 100).toFixed(0)}%)</p>
+                                </div>
+                                <div className="flex items-start gap-3">
+                                    <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">3</div>
+                                    <p><strong>Mutation:</strong> Introduces diversity, prevents premature convergence (rate = {(mutationRate * 100).toFixed(0)}%)</p>
+                                </div>
+                                <div className="flex items-start gap-3">
+                                    <div className="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">4</div>
+                                    <p><strong>Result:</strong> Average fitness <InlineMath math="\bar{f}(t)" /> increases over generations</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </CardContent>
+            </Card>
+
+            {/* Interactive Simulation */}
+            <Card>
+                <CardHeader>
+                    <CardTitle>🧬 Interactive Genetic Algorithm Simulation</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <p className="text-gray-600 mb-6">
@@ -126,6 +229,16 @@ function GeneticAlgorithm() {
                                     min={10}
                                     max={100}
                                     step={10}
+                                    description="Number of solutions in each generation"
+                                />
+                                <Slider
+                                    label={`Crossover Rate: ${(crossoverRate * 100).toFixed(0)}%`}
+                                    value={crossoverRate}
+                                    onChange={setCrossoverRate}
+                                    min={0.5}
+                                    max={1}
+                                    step={0.05}
+                                    description="Probability of combining parent genes"
                                 />
                                 <Slider
                                     label={`Mutation Rate: ${(mutationRate * 100).toFixed(0)}%`}
@@ -134,6 +247,7 @@ function GeneticAlgorithm() {
                                     min={0.01}
                                     max={0.5}
                                     step={0.01}
+                                    description="Probability of random gene changes"
                                 />
                             </div>
 
@@ -148,6 +262,7 @@ function GeneticAlgorithm() {
                                 </Button>
                                 <Button
                                     onClick={() => setGeneration(0)}
+                                    variant="outline"
                                     className="flex items-center gap-2"
                                 >
                                     <RotateCcw className="w-4 h-4" />
@@ -155,13 +270,13 @@ function GeneticAlgorithm() {
                             </div>
 
                             <div className="bg-green-50 rounded-lg p-4">
-                                <h4 className="font-semibold text-green-900 mb-3">Top 10 Individuals</h4>
+                                <h4 className="font-semibold text-green-900 mb-3">Top 10 Individuals (Chromosomes)</h4>
                                 <div className="space-y-2">
                                     {population.map((ind) => (
                                         <div key={ind.id} className="flex items-center justify-between p-2 bg-white rounded">
                                             <span className="text-xs font-mono">{ind.genes}</span>
                                             <span className="text-sm font-semibold text-green-600">
-                                                {ind.fitness.toFixed(1)}
+                                                f(x) = {ind.fitness.toFixed(1)}
                                             </span>
                                         </div>
                                     ))}
@@ -170,12 +285,12 @@ function GeneticAlgorithm() {
                         </div>
 
                         <div>
-                            <h3 className="font-semibold mb-4">Fitness Evolution</h3>
+                            <h3 className="font-semibold mb-4">Fitness Evolution Over Generations</h3>
                             <ResponsiveContainer width="100%" height={300}>
                                 <LineChart data={fitnessData}>
                                     <CartesianGrid strokeDasharray="3 3" />
-                                    <XAxis dataKey="generation" />
-                                    <YAxis />
+                                    <XAxis dataKey="generation" label={{ value: 'Generation (t)', position: 'insideBottom', offset: -5 }} />
+                                    <YAxis label={{ value: 'Fitness f(x)', angle: -90, position: 'insideLeft' }} />
                                     <Tooltip />
                                     <Legend />
                                     <Line type="monotone" dataKey="best" stroke="#10b981" strokeWidth={2} name="Best" />
@@ -188,8 +303,9 @@ function GeneticAlgorithm() {
                                 <h4 className="font-semibold text-blue-900 mb-2">Current Generation: {generation}</h4>
                                 <div className="text-sm text-blue-700 space-y-1">
                                     <p>Best Fitness: {fitnessData[generation]?.best.toFixed(2) || 0}</p>
-                                    <p>Average Fitness: {fitnessData[generation]?.average.toFixed(2) || 0}</p>
-                                    <p>Population: {populationSize} individuals</p>
+                                    <p>Average Fitness <InlineMath math="\bar{f}" />: {fitnessData[generation]?.average.toFixed(2) || 0}</p>
+                                    <p>Population Size N: {populationSize}</p>
+                                    <p>Improvement: {generation > 0 ? ((fitnessData[generation]?.best - fitnessData[0]?.best) / fitnessData[0]?.best * 100).toFixed(1) : 0}%</p>
                                 </div>
                             </div>
                         </div>
@@ -199,39 +315,51 @@ function GeneticAlgorithm() {
 
             <Card>
                 <CardHeader>
-                    <CardTitle>How Genetic Algorithms Work</CardTitle>
+                    <CardTitle>🎯 Genetic Operators Explained</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div className="p-4 bg-blue-50 rounded-lg">
+                        <div className="p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
                             <div className="text-3xl mb-2">🎲</div>
                             <h4 className="font-semibold text-blue-900 mb-2">1. Initialize</h4>
-                            <p className="text-xs text-blue-700">
-                                Create random population of solutions (like random recipes)
+                            <p className="text-xs text-blue-700 mb-2">
+                                Create random population of solutions
+                            </p>
+                            <p className="text-xs text-blue-600 font-mono">
+                                N = {populationSize} individuals
                             </p>
                         </div>
 
-                        <div className="p-4 bg-green-50 rounded-lg">
+                        <div className="p-4 bg-green-50 rounded-lg border-2 border-green-200">
                             <div className="text-3xl mb-2">⭐</div>
                             <h4 className="font-semibold text-green-900 mb-2">2. Selection</h4>
-                            <p className="text-xs text-green-700">
-                                Choose best individuals to be parents (survival of the fittest)
+                            <p className="text-xs text-green-700 mb-2">
+                                Choose parents based on fitness
+                            </p>
+                            <p className="text-xs text-green-600">
+                                <InlineMath math="P(x_i) \propto f(x_i)" />
                             </p>
                         </div>
 
-                        <div className="p-4 bg-purple-50 rounded-lg">
+                        <div className="p-4 bg-purple-50 rounded-lg border-2 border-purple-200">
                             <div className="text-3xl mb-2">🔀</div>
                             <h4 className="font-semibold text-purple-900 mb-2">3. Crossover</h4>
-                            <p className="text-xs text-purple-700">
-                                Combine parents to create offspring (mix recipes)
+                            <p className="text-xs text-purple-700 mb-2">
+                                Combine parent genes
+                            </p>
+                            <p className="text-xs text-purple-600 font-mono">
+                                Rate = {(crossoverRate * 100).toFixed(0)}%
                             </p>
                         </div>
 
-                        <div className="p-4 bg-orange-50 rounded-lg">
+                        <div className="p-4 bg-orange-50 rounded-lg border-2 border-orange-200">
                             <div className="text-3xl mb-2">⚡</div>
                             <h4 className="font-semibold text-orange-900 mb-2">4. Mutation</h4>
-                            <p className="text-xs text-orange-700">
-                                Random small changes (add a pinch of innovation)
+                            <p className="text-xs text-orange-700 mb-2">
+                                Random gene changes
+                            </p>
+                            <p className="text-xs text-orange-600">
+                                <InlineMath math="p_m" /> = {(mutationRate * 100).toFixed(0)}%
                             </p>
                         </div>
                     </div>
