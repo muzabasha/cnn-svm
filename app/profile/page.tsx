@@ -93,11 +93,11 @@ export default function ProfilePage() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-            <div className="container mx-auto px-4 py-8">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
                 {/* Header Section */}
-                <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
-                    <div className="flex flex-col md:flex-row items-center gap-8">
-                        <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-blue-500 shadow-lg flex-shrink-0 bg-gray-100">
+                <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8">
+                    <div className="flex flex-col md:flex-row items-center gap-6 sm:gap-8">
+                        <div className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-blue-500 shadow-lg flex-shrink-0 bg-gray-100">
                             <img
                                 src="/DP_profile.png"
                                 alt="Dr. Syed Muzamil Basha"
@@ -111,87 +111,89 @@ export default function ProfilePage() {
                         </div>
 
                         <div className="flex-1 text-center md:text-left">
-                            <h1 className="text-4xl font-bold text-gray-900 mb-2">
+                            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
                                 Dr. Syed Muzamil Basha
                             </h1>
-                            <p className="text-xl text-blue-600 mb-2">
+                            <p className="text-base sm:text-lg lg:text-xl text-blue-600 mb-2">
                                 Professor | Senior IEEE Member | Lifetime ISTE Member
                             </p>
-                            <p className="text-lg text-gray-700 mb-4">
+                            <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-4">
                                 School of Computer Science & Engineering, REVA University
                             </p>
-                            <p className="text-gray-600 mb-6 max-w-3xl">
+                            <p className="text-gray-600 mb-6 max-w-3xl text-sm sm:text-base">
                                 Leading researcher and educator in Artificial Intelligence, Machine Learning, and Deep Learning
                                 with 85+ publications, 2,187 citations (H-index: 27), 10+ patents, and a passion for innovative educational technology.
                                 Committed to advancing AI education through experiential learning platforms.
                             </p>
 
-                            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                            <div className="flex flex-wrap gap-2 sm:gap-3 lg:gap-4 justify-center md:justify-start">
                                 <a
                                     href="https://scholar.google.co.in/citations?user=weNQmW0AAAAJ&hl=en"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                                    className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 bg-blue-600 text-white text-xs sm:text-sm rounded-lg hover:bg-blue-700 transition-colors active:scale-95"
                                 >
-                                    <GraduationCap className="w-5 h-5" />
-                                    Google Scholar
-                                    <ExternalLink className="w-4 h-4" />
+                                    <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5" />
+                                    <span className="hidden sm:inline">Google Scholar</span>
+                                    <span className="sm:hidden">Scholar</span>
+                                    <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                                 </a>
                                 <a
                                     href="https://www.linkedin.com/in/muzamil-basha-syed"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors"
+                                    className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 bg-blue-700 text-white text-xs sm:text-sm rounded-lg hover:bg-blue-800 transition-colors active:scale-95"
                                 >
-                                    <Linkedin className="w-5 h-5" />
+                                    <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
                                     LinkedIn
-                                    <ExternalLink className="w-4 h-4" />
+                                    <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                                 </a>
                                 <a
                                     href="http://orcid.org/0000-0002-1169-3151"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                                    className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 bg-green-600 text-white text-xs sm:text-sm rounded-lg hover:bg-green-700 transition-colors active:scale-95"
                                 >
-                                    <Globe className="w-5 h-5" />
+                                    <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
                                     ORCID
-                                    <ExternalLink className="w-4 h-4" />
+                                    <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                                 </a>
                                 <a
                                     href="https://www.scopus.com/authid/detail.uri?authorId=57195586589"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
+                                    className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 bg-orange-600 text-white text-xs sm:text-sm rounded-lg hover:bg-orange-700 transition-colors active:scale-95"
                                 >
-                                    <Globe className="w-5 h-5" />
+                                    <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
                                     Scopus
-                                    <ExternalLink className="w-4 h-4" />
+                                    <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                                 </a>
                                 <a
                                     href="https://publons.com/researcher/3362117/syed-muzamil"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                                    className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 bg-purple-600 text-white text-xs sm:text-sm rounded-lg hover:bg-purple-700 transition-colors active:scale-95"
                                 >
-                                    <Globe className="w-5 h-5" />
+                                    <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
                                     Publons
-                                    <ExternalLink className="w-4 h-4" />
+                                    <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                                 </a>
                                 <a
                                     href="https://www.researchgate.net/profile/Muzamil_Basha"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
+                                    className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 bg-teal-600 text-white text-xs sm:text-sm rounded-lg hover:bg-teal-700 transition-colors active:scale-95"
                                 >
-                                    <Globe className="w-5 h-5" />
-                                    ResearchGate
-                                    <ExternalLink className="w-4 h-4" />
+                                    <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
+                                    <span className="hidden sm:inline">ResearchGate</span>
+                                    <span className="sm:hidden">RG</span>
+                                    <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                                 </a>
                                 <a
                                     href="mailto:muzamilbasha.s@reva.edu.in"
-                                    className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                                    className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 bg-gray-600 text-white text-xs sm:text-sm rounded-lg hover:bg-gray-700 transition-colors active:scale-95"
                                 >
-                                    <Mail className="w-5 h-5" />
+                                    <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                                     Email
                                 </a>
                             </div>
@@ -200,17 +202,17 @@ export default function ProfilePage() {
                 </div>
 
                 {/* Statistics Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-6 sm:mb-8">
                     {stats.map((stat, index) => {
                         const Icon = stat.icon
                         return (
                             <Card key={index} className="hover:shadow-lg transition-shadow">
-                                <CardContent className="p-6">
-                                    <div className={`${stat.color} w-12 h-12 rounded-xl flex items-center justify-center mb-4`}>
-                                        <Icon className="w-6 h-6 text-white" />
+                                <CardContent className="p-4 sm:p-6">
+                                    <div className={`${stat.color} w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-3 sm:mb-4`}>
+                                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                                     </div>
-                                    <p className="text-3xl font-bold text-gray-900 mb-1">{stat.value}</p>
-                                    <p className="text-sm text-gray-600">{stat.label}</p>
+                                    <p className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">{stat.value}</p>
+                                    <p className="text-xs sm:text-sm text-gray-600">{stat.label}</p>
                                 </CardContent>
                             </Card>
                         )
@@ -218,7 +220,7 @@ export default function ProfilePage() {
                 </div>
 
                 {/* Professional Affiliations & Contact */}
-                <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                     <Card>
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
@@ -300,19 +302,19 @@ export default function ProfilePage() {
                 </div>
 
                 {/* Research Areas */}
-                <Card className="mb-8">
+                <Card className="mb-6 sm:mb-8">
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                            <BookOpen className="w-6 h-6 text-blue-600" />
+                        <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                            <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                             Research Areas
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="flex flex-wrap gap-3">
+                        <div className="flex flex-wrap gap-2 sm:gap-3">
                             {researchAreas.map((area, index) => (
                                 <span
                                     key={index}
-                                    className="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors"
+                                    className="px-3 sm:px-4 py-1.5 sm:py-2 bg-blue-100 text-blue-800 rounded-full text-xs sm:text-sm font-medium hover:bg-blue-200 transition-colors"
                                 >
                                     {area}
                                 </span>
@@ -322,15 +324,15 @@ export default function ProfilePage() {
                 </Card>
 
                 {/* Key Achievements */}
-                <Card className="mb-8">
+                <Card className="mb-6 sm:mb-8">
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                            <Award className="w-6 h-6 text-purple-600" />
+                        <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                            <Award className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
                             Key Achievements
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="grid md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                             {achievements.map((achievement, index) => {
                                 const Icon = achievement.icon
                                 return (
@@ -352,7 +354,7 @@ export default function ProfilePage() {
                 </Card>
 
                 {/* Academic Impact */}
-                <div className="grid md:grid-cols-2 gap-8 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8">
                     <Card>
                         <CardHeader>
                             <CardTitle className="flex items-center gap-2">
@@ -426,10 +428,10 @@ export default function ProfilePage() {
                 </div>
 
                 {/* Publications Highlight */}
-                <Card className="mb-8">
+                <Card className="mb-6 sm:mb-8">
                     <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                            <FileText className="w-6 h-6 text-blue-600" />
+                        <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                            <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                             Publication Highlights
                         </CardTitle>
                     </CardHeader>
@@ -461,24 +463,24 @@ export default function ProfilePage() {
                 </Card>
 
                 {/* Recent Publications Section */}
-                <Card className="mb-8">
+                <Card className="mb-6 sm:mb-8">
                     <CardHeader>
-                        <div className="flex items-center justify-between">
-                            <CardTitle className="flex items-center gap-2">
-                                <FileText className="w-6 h-6 text-blue-600" />
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                            <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+                                <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                                 Recent Quality Publications
                             </CardTitle>
                             <a
                                 href="https://scholar.google.co.in/citations?user=weNQmW0AAAAJ&hl=en"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700"
+                                className="flex items-center gap-2 text-xs sm:text-sm text-blue-600 hover:text-blue-700 active:scale-95"
                             >
                                 View All on Google Scholar
-                                <ExternalLink className="w-4 h-4" />
+                                <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                             </a>
                         </div>
-                        <p className="text-sm text-gray-600 mt-2">
+                        <p className="text-xs sm:text-sm text-gray-600 mt-2">
                             Selected high-impact publications from recent years. Last updated: February 2026
                         </p>
                     </CardHeader>

@@ -36,3 +36,119 @@
 
 /* KaTeX styles */
 @import 'katex/dist/katex.min.css';
+
+/* Mobile optimizations */
+@layer utilities {
+
+    /* Smooth scrolling for mobile */
+    html {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+
+    /* Prevent text size adjustment on mobile */
+    body {
+        -webkit-text-size-adjust: 100%;
+        -moz-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+    }
+
+    /* Better touch targets for mobile */
+    button,
+    a,
+    input,
+    select,
+    textarea {
+        touch-action: manipulation;
+    }
+
+    /* Prevent zoom on input focus (iOS) */
+    input,
+    select,
+    textarea {
+        font-size: 16px;
+    }
+
+    /* Smooth animations on mobile */
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Better scrolling for overflow containers */
+    .overflow-auto,
+    .overflow-x-auto,
+    .overflow-y-auto {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Mobile-friendly card spacing */
+    @media (max-width: 768px) {
+        .container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+    }
+
+    /* Responsive text sizing */
+    @media (max-width: 640px) {
+        h1 {
+            font-size: 2rem;
+            line-height: 2.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            line-height: 2rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+        }
+    }
+
+    /* Better chart responsiveness */
+    .recharts-wrapper {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Mobile-friendly tables */
+    @media (max-width: 768px) {
+        table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+    }
+
+    /* Touch-friendly sliders */
+    input[type="range"] {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 8px;
+        border-radius: 4px;
+        background: #e5e7eb;
+        outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #3b82f6;
+        cursor: pointer;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #3b82f6;
+        cursor: pointer;
+        border: none;
+    }
+}
