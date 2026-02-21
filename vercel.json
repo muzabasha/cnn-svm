@@ -1,0 +1,16 @@
+{
+    "buildCommand": "next build",
+    "devCommand": "next dev",
+    "installCommand": "npm install",
+    "framework": "nextjs",
+    "rewrites": [
+        {
+            "source": "/api/cnn/:path*",
+            "destination": "/api/cnn/:path*"
+        },
+        {
+            "source": "/api/svm/:path*",
+            "destination": "/api/svm/:path*"
+        }
+    ]
+}
