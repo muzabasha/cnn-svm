@@ -114,8 +114,11 @@ export default function ProfilePage() {
                             <h1 className="text-4xl font-bold text-gray-900 mb-2">
                                 Dr. Syed Muzamil Basha
                             </h1>
-                            <p className="text-xl text-blue-600 mb-4">
-                                Associate Professor | AI & Machine Learning Expert
+                            <p className="text-xl text-blue-600 mb-2">
+                                Professor | Senior IEEE Member | Lifetime ISTE Member
+                            </p>
+                            <p className="text-lg text-gray-700 mb-4">
+                                School of Computer Science & Engineering, REVA University
                             </p>
                             <p className="text-gray-600 mb-6 max-w-3xl">
                                 Leading researcher and educator in Artificial Intelligence, Machine Learning, and Deep Learning
@@ -125,7 +128,7 @@ export default function ProfilePage() {
 
                             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                                 <a
-                                    href="https://scholar.google.com/citations?user=YOUR_ID"
+                                    href="https://scholar.google.co.in/citations?user=weNQmW0AAAAJ&hl=en"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -145,21 +148,51 @@ export default function ProfilePage() {
                                     <ExternalLink className="w-4 h-4" />
                                 </a>
                                 <a
-                                    href="https://www.igi-global.com/affiliate/syed-muzamil-basha/463546"
+                                    href="http://orcid.org/0000-0002-1169-3151"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                                >
+                                    <Globe className="w-5 h-5" />
+                                    ORCID
+                                    <ExternalLink className="w-4 h-4" />
+                                </a>
+                                <a
+                                    href="https://www.scopus.com/authid/detail.uri?authorId=57195586589"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors"
+                                >
+                                    <Globe className="w-5 h-5" />
+                                    Scopus
+                                    <ExternalLink className="w-4 h-4" />
+                                </a>
+                                <a
+                                    href="https://publons.com/researcher/3362117/syed-muzamil"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
                                 >
                                     <Globe className="w-5 h-5" />
-                                    IGI Global
+                                    Publons
                                     <ExternalLink className="w-4 h-4" />
                                 </a>
                                 <a
-                                    href="mailto:muzamilbasha@example.com"
+                                    href="https://www.researchgate.net/profile/Muzamil_Basha"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
+                                >
+                                    <Globe className="w-5 h-5" />
+                                    ResearchGate
+                                    <ExternalLink className="w-4 h-4" />
+                                </a>
+                                <a
+                                    href="mailto:muzamilbasha.s@reva.edu.in"
                                     className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
                                 >
                                     <Mail className="w-5 h-5" />
-                                    Contact
+                                    Email
                                 </a>
                             </div>
                         </div>
@@ -182,6 +215,79 @@ export default function ProfilePage() {
                             </Card>
                         )
                     })}
+                </div>
+
+                {/* Professional Affiliations & Contact */}
+                <div className="grid md:grid-cols-2 gap-6 mb-8">
+                    <Card>
+                        <CardHeader>
+                            <CardTitle className="flex items-center gap-2">
+                                <Award className="w-6 h-6 text-purple-600" />
+                                Professional Memberships
+                            </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="space-y-3">
+                                <div className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+                                    <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <Award className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <p className="font-semibold text-gray-900">Senior IEEE Member</p>
+                                        <p className="text-sm text-gray-600">Institute of Electrical and Electronics Engineers</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg">
+                                    <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <Award className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <p className="font-semibold text-gray-900">Lifetime ISTE Member</p>
+                                        <p className="text-sm text-gray-600">Indian Society for Technical Education</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    <Card>
+                        <CardHeader>
+                            <CardTitle className="flex items-center gap-2">
+                                <Mail className="w-6 h-6 text-teal-600" />
+                                Contact Information
+                            </CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="space-y-4">
+                                <div>
+                                    <p className="text-sm font-semibold text-gray-700 mb-1">Institution</p>
+                                    <p className="text-gray-900">REVA University</p>
+                                    <p className="text-sm text-gray-600">School of Computer Science & Engineering</p>
+                                </div>
+                                <div>
+                                    <p className="text-sm font-semibold text-gray-700 mb-1">Address</p>
+                                    <p className="text-sm text-gray-600">
+                                        Rukmini Knowledge Park, Kattigenahalli<br />
+                                        Yelahanka, Bengaluru, Karnataka 560064<br />
+                                        India
+                                    </p>
+                                </div>
+                                <div>
+                                    <p className="text-sm font-semibold text-gray-700 mb-1">Email</p>
+                                    <a href="mailto:muzamilbasha.s@reva.edu.in" className="text-blue-600 hover:text-blue-700 text-sm">
+                                        muzamilbasha.s@reva.edu.in
+                                    </a>
+                                </div>
+                                <div>
+                                    <p className="text-sm font-semibold text-gray-700 mb-1">Phone</p>
+                                    <p className="text-sm text-gray-600">
+                                        +91 8331977568<br />
+                                        +91 7259421438
+                                    </p>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
                 </div>
 
                 {/* Research Areas */}
@@ -354,7 +460,7 @@ export default function ProfilePage() {
                                 Recent Quality Publications
                             </CardTitle>
                             <a
-                                href="https://scholar.google.com/citations?user=YOUR_ID"
+                                href="https://scholar.google.co.in/citations?user=weNQmW0AAAAJ&hl=en"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700"
