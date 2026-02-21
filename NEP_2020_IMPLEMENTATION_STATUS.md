@@ -106,6 +106,40 @@ This document tracks the implementation of experiential learning features across
 - ✅ Self-paced (manual/auto modes)
 - ✅ Immediate feedback (visual clustering)
 
+### 3. Decision Tree
+**File**: `components/decision-tree/EnhancedInteractiveBuilder.tsx`
+**Status**: ✅ Complete
+
+**Features Implemented**:
+- **Explore Mode**:
+  - Interactive dataset editor (add/remove/edit rows)
+  - Build tree with one click
+  - Visual tree structure with Gini values
+  - Test predictions with custom inputs
+  - Real-time tree updates
+
+- **Learn Mode**:
+  - Gini impurity formula
+  - Entropy formula
+  - Information gain calculation
+  - Tree building process steps
+  - Advantages and limitations
+
+- **Challenge Mode**:
+  - Challenge 1: Build First Tree (10 points)
+  - Challenge 2: Perfect Split (20 points)
+  - Challenge 3: Test Predictions (15 points)
+  - Progressive hints
+  - Success validation
+  - Completion tracking
+
+**NEP 2020 Alignment**:
+- ✅ Hands-on learning (edit dataset, build tree)
+- ✅ Discovery-based (experiment with data)
+- ✅ Problem-solving (create perfect splits)
+- ✅ Self-paced (three modes)
+- ✅ Immediate feedback (visual tree structure)
+
 ## Integration Status
 
 ### Updated Files:
@@ -164,10 +198,10 @@ This document tracks the implementation of experiential learning features across
 
 ## Success Metrics
 
-### Completed Labs (2/10):
+### Completed Labs (3/10):
 - ✅ KNN - Full experiential learning
 - ✅ K-Means - Full experiential learning
-- ⏳ Decision Tree
+- ✅ Decision Tree - Full experiential learning
 - ⏳ SVM
 - ⏳ Naive Bayes
 - ⏳ ANN/DNN
@@ -267,5 +301,5 @@ components/
 ---
 
 **Last Updated**: Current session
-**Status**: 20% Complete (2/10 labs enhanced)
-**Next Priority**: Decision Tree enhancement
+**Status**: 30% Complete (3/10 labs enhanced)
+**Next Priority**: SVM enhancement

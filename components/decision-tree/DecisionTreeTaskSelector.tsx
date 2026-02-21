@@ -11,6 +11,13 @@ interface Props {
 export function DecisionTreeTaskSelector({ activeModule, onModuleChange }: Props) {
     const modules = [
         {
+            id: 'enhanced',
+            name: '🌟 Learn by Doing',
+            icon: Hammer,
+            description: 'Interactive exploration with challenges',
+            color: 'bg-gradient-to-br from-yellow-400 to-orange-400'
+        },
+        {
             id: 'tree-viz',
             name: 'Tree Visualization',
             icon: TreeDeciduous,
@@ -41,15 +48,19 @@ export function DecisionTreeTaskSelector({ activeModule, onModuleChange }: Props
     ]
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {modules.map((module) => {
                 const Icon = module.icon
                 return (
                     <Card
                         key={module.id}
-                        className={`cursor-pointer transition-all hover:shadow-lg ${activeModule === module.id
-                                ? 'ring-2 ring-green-500 shadow-lg'
-                                : 'hover:ring-2 hover:ring-green-300'
+                        className={`cursor-pointer transition-all hover:shadow-lg ${module.id === 'enhanced'
+                                ? activeModule === module.id
+                                    ? 'ring-2 ring-yellow-500 shadow-lg'
+                                    : 'hover:ring-2 hover:ring-yellow-400 shadow-md'
+                                : activeModule === module.id
+                                    ? 'ring-2 ring-green-500 shadow-lg'
+                                    : 'hover:ring-2 hover:ring-green-300'
                             }`}
                         onClick={() => onModuleChange(module.id)}
                     >

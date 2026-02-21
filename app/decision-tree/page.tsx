@@ -6,9 +6,10 @@ import { TreeVisualization } from '@/components/decision-tree/TreeVisualization'
 import { SplittingCriteria } from '@/components/decision-tree/SplittingCriteria'
 import { PruningModule } from '@/components/decision-tree/PruningModule'
 import { InteractiveBuilder } from '@/components/decision-tree/InteractiveBuilder'
+import { EnhancedInteractiveBuilder } from '@/components/decision-tree/EnhancedInteractiveBuilder'
 
 export default function DecisionTreeLab() {
-    const [activeModule, setActiveModule] = useState<string>('tree-viz')
+    const [activeModule, setActiveModule] = useState<string>('enhanced')
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50">
@@ -28,6 +29,7 @@ export default function DecisionTreeLab() {
                 />
 
                 <div className="mt-6">
+                    {activeModule === 'enhanced' && <EnhancedInteractiveBuilder />}
                     {activeModule === 'tree-viz' && <TreeVisualization />}
                     {activeModule === 'splitting' && <SplittingCriteria />}
                     {activeModule === 'pruning' && <PruningModule />}
