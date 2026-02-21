@@ -246,6 +246,15 @@ export default function ProfilePage() {
                                         <p className="text-sm text-gray-600">Indian Society for Technical Education</p>
                                     </div>
                                 </div>
+                                <div className="flex items-center gap-3 p-3 bg-indigo-50 rounded-lg">
+                                    <div className="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <Award className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div>
+                                        <p className="font-semibold text-gray-900">ACM Professional Member</p>
+                                        <p className="text-sm text-gray-600">Association for Computing Machinery</p>
+                                    </div>
+                                </div>
                             </div>
                         </CardContent>
                     </Card>
