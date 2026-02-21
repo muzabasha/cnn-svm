@@ -4,13 +4,14 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { CNNTaskSelector } from '@/components/cnn/CNNTaskSelector'
+import { PlantDiseaseModule } from '@/components/cnn/PlantDiseaseModule'
 import { ConvolutionModule } from '@/components/cnn/ConvolutionModule'
 import { PoolingModule } from '@/components/cnn/PoolingModule'
 import { ActivationModule } from '@/components/cnn/ActivationModule'
 import { FullyConnectedModule } from '@/components/cnn/FullyConnectedModule'
 
 export default function CNNLab() {
-    const [selectedTask, setSelectedTask] = useState<string>('convolution')
+    const [selectedTask, setSelectedTask] = useState<string>('plant-disease')
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -35,6 +36,7 @@ export default function CNNLab() {
                 </aside>
 
                 <main className="flex-1 p-6">
+                    {selectedTask === 'plant-disease' && <PlantDiseaseModule />}
                     {selectedTask === 'convolution' && <ConvolutionModule />}
                     {selectedTask === 'pooling' && <PoolingModule />}
                     {selectedTask === 'activation' && <ActivationModule />}

@@ -1,4 +1,4 @@
-import { Layers, Droplet, Zap, Network } from 'lucide-react'
+import { Layers, Droplet, Zap, Network, Leaf } from 'lucide-react'
 
 interface Task {
     id: string
@@ -7,6 +7,7 @@ interface Task {
 }
 
 const tasks: Task[] = [
+    { id: 'plant-disease', name: 'Plant Disease Detection', icon: <Leaf className="w-4 h-4" /> },
     { id: 'convolution', name: 'Convolution Operation', icon: <Layers className="w-4 h-4" /> },
     { id: 'pooling', name: 'Pooling Operation', icon: <Droplet className="w-4 h-4" /> },
     { id: 'activation', name: 'Activation Functions', icon: <Zap className="w-4 h-4" /> },
@@ -29,8 +30,8 @@ export function CNNTaskSelector({ selectedTask, onSelectTask }: CNNTaskSelectorP
                     key={task.id}
                     onClick={() => onSelectTask(task.id)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all ${selectedTask === task.id
-                            ? 'bg-blue-50 text-blue-700 font-medium'
-                            : 'text-gray-700 hover:bg-gray-50'
+                        ? 'bg-blue-50 text-blue-700 font-medium'
+                        : 'text-gray-700 hover:bg-gray-50'
                         }`}
                 >
                     {task.icon}
