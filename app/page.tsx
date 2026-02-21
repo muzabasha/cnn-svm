@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Brain, Network } from 'lucide-react'
+import { Brain, Network, TreeDeciduous, Calculator, Trees } from 'lucide-react'
 
 export default function Home() {
     return (
@@ -17,7 +17,7 @@ export default function Home() {
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <Link href="/cnn">
                         <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all cursor-pointer group">
                             <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-2xl mb-6 group-hover:scale-110 transition-transform">
@@ -54,6 +54,66 @@ export default function Home() {
                                 <li>✓ Kernel experiments</li>
                                 <li>✓ Hyperparameter tuning</li>
                                 <li>✓ Real-time decision boundaries</li>
+                            </ul>
+                        </div>
+                    </Link>
+
+                    <Link href="/decision-tree">
+                        <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all cursor-pointer group">
+                            <div className="flex items-center justify-center w-16 h-16 bg-green-100 rounded-2xl mb-6 group-hover:scale-110 transition-transform">
+                                <TreeDeciduous className="w-8 h-8 text-green-600" />
+                            </div>
+                            <h2 className="text-2xl font-bold text-gray-900 mb-3">
+                                Decision Tree Lab
+                            </h2>
+                            <p className="text-gray-600 mb-4">
+                                Build and visualize decision trees interactively
+                            </p>
+                            <ul className="space-y-2 text-sm text-gray-500">
+                                <li>✓ Tree growth animation</li>
+                                <li>✓ Splitting criteria (Gini, Entropy)</li>
+                                <li>✓ Pruning techniques</li>
+                                <li>✓ Interactive tree builder</li>
+                            </ul>
+                        </div>
+                    </Link>
+
+                    <Link href="/naive-bayes">
+                        <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all cursor-pointer group">
+                            <div className="flex items-center justify-center w-16 h-16 bg-purple-100 rounded-2xl mb-6 group-hover:scale-110 transition-transform">
+                                <Calculator className="w-8 h-8 text-purple-600" />
+                            </div>
+                            <h2 className="text-2xl font-bold text-gray-900 mb-3">
+                                Naive Bayes Lab
+                            </h2>
+                            <p className="text-gray-600 mb-4">
+                                Understand probabilistic classification
+                            </p>
+                            <ul className="space-y-2 text-sm text-gray-500">
+                                <li>✓ Bayes' theorem explained</li>
+                                <li>✓ Probability calculator</li>
+                                <li>✓ Text classification demo</li>
+                                <li>✓ Conditional probability</li>
+                            </ul>
+                        </div>
+                    </Link>
+
+                    <Link href="/random-forest">
+                        <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all cursor-pointer group">
+                            <div className="flex items-center justify-center w-16 h-16 bg-teal-100 rounded-2xl mb-6 group-hover:scale-110 transition-transform">
+                                <Trees className="w-8 h-8 text-teal-600" />
+                            </div>
+                            <h2 className="text-2xl font-bold text-gray-900 mb-3">
+                                Random Forest Lab
+                            </h2>
+                            <p className="text-gray-600 mb-4">
+                                Explore ensemble learning with multiple trees
+                            </p>
+                            <ul className="space-y-2 text-sm text-gray-500">
+                                <li>✓ Forest visualization</li>
+                                <li>✓ Bootstrapping explained</li>
+                                <li>✓ Voting mechanism</li>
+                                <li>✓ Feature importance</li>
                             </ul>
                         </div>
                     </Link>
