@@ -224,7 +224,7 @@ function LearningJourneyMindMap() {
             level: 5,
             title: "⭐ Master Chef: Specialized Techniques",
             subtitle: "Mastering advanced culinary arts",
-            description: "You're now a master! Handling complex scenarios like time-based cooking, visual presentation, and understanding language of food.",
+            description: "You're now a master! Handling complex scenarios like time-based cooking, visual presentation, understanding language of food, and nature-inspired optimization.",
             color: "from-indigo-400 to-purple-600",
             bgColor: "bg-indigo-50",
             borderColor: "border-indigo-300",
@@ -249,6 +249,13 @@ function LearningJourneyMindMap() {
                     link: "/nlp",
                     analogy: "📖 Reading Recipes",
                     description: "Understanding food language: 'al dente', 'julienne', 'sauté'"
+                },
+                {
+                    name: "Bio-Inspired Optimization",
+                    icon: <Sparkles className="w-6 h-6" />,
+                    link: "/bio-inspired",
+                    analogy: "🌿 Nature's Recipes",
+                    description: "Learning from nature: evolution, swarms, and natural selection"
                 }
             ]
         }
@@ -380,7 +387,8 @@ function AllLabsGrid() {
         { name: "Deep Neural Networks", icon: <Layers />, link: "/dnn", color: "emerald", level: "Advanced" },
         { name: "Recurrent Neural Networks", icon: <GitBranch />, link: "/rnn", color: "purple", level: "Advanced" },
         { name: "Convolutional Neural Networks", icon: <Brain />, link: "/cnn", color: "blue", level: "Advanced" },
-        { name: "NLP & Language Models", icon: <MessageSquare />, link: "/nlp", color: "indigo", level: "Advanced" }
+        { name: "NLP & Language Models", icon: <MessageSquare />, link: "/nlp", color: "indigo", level: "Advanced" },
+        { name: "Bio-Inspired Optimization", icon: <Sparkles />, link: "/bio-inspired", color: "green", level: "Advanced" }
     ]
 
     return (
