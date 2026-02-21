@@ -8,9 +8,10 @@ import { DatasetPlayground } from '@/components/svm/DatasetPlayground'
 import { KernelLab } from '@/components/svm/KernelLab'
 import { TrainingVisualization } from '@/components/svm/TrainingVisualization'
 import { EvaluationDashboard } from '@/components/svm/EvaluationDashboard'
+import { EnhancedSVMPlayground } from '@/components/svm/EnhancedSVMPlayground'
 
 export default function SVMLab() {
-    const [selectedTask, setSelectedTask] = useState<string>('dataset')
+    const [selectedTask, setSelectedTask] = useState<string>('enhanced')
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -35,6 +36,7 @@ export default function SVMLab() {
                 </aside>
 
                 <main className="flex-1 p-6">
+                    {selectedTask === 'enhanced' && <EnhancedSVMPlayground />}
                     {selectedTask === 'dataset' && <DatasetPlayground />}
                     {selectedTask === 'kernel' && <KernelLab />}
                     {selectedTask === 'training' && <TrainingVisualization />}
