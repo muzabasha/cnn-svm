@@ -115,9 +115,9 @@ export function InteractiveBuilder() {
                                                 </td>
                                                 <td className="p-2">
                                                     <Button
-                                                        size="sm"
                                                         variant="outline"
                                                         onClick={() => removeDataPoint(row.id)}
+                                                        className="px-2 py-1"
                                                     >
                                                         <Trash2 className="w-4 h-4" />
                                                     </Button>
