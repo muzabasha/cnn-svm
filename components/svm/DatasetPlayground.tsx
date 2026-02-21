@@ -19,7 +19,7 @@ export function DatasetPlayground() {
     const [numSamples, setNumSamples] = useState(100)
     const [data, setData] = useState<DataPoint[]>([])
 
-    const generateLinearData = () => {
+    const generateLinearData = useCallback(() => {
         const points: DataPoint[] = []
         for (let i = 0; i < numSamples / 2; i++) {
             points.push({
@@ -34,9 +34,9 @@ export function DatasetPlayground() {
             })
         }
         return points
-    }
+    }, [numSamples, noise])
 
-    const generateMoonData = () => {
+    const generateMoonData = useCallback(() => {
         const points: DataPoint[] = []
         for (let i = 0; i < numSamples / 2; i++) {
             const angle = Math.PI * i / (numSamples / 2)
@@ -52,9 +52,9 @@ export function DatasetPlayground() {
             })
         }
         return points
-    }
+    }, [numSamples, noise])
 
-    const generateCircularData = () => {
+    const generateCircularData = useCallback(() => {
         const points: DataPoint[] = []
         for (let i = 0; i < numSamples / 2; i++) {
             const angle = Math.random() * 2 * Math.PI
@@ -72,13 +72,13 @@ export function DatasetPlayground() {
             })
         }
         return points
-    }
+    }, [numSamples, noise])
 
     const generateData = useCallback(() => {
         if (datasetType === 'linear') return generateLinearData()
         if (datasetType === 'moon') return generateMoonData()
         return generateCircularData()
-    }, [datasetType, noise, numSamples])
+    }, [datasetType, generateLinearData, generateMoonData, generateCircularData])
 
     useEffect(() => {
         setData(generateData())

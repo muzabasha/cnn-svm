@@ -56,7 +56,7 @@ export function EvaluationDashboard() {
                                             <CartesianGrid strokeDasharray="3 3" />
                                             <XAxis dataKey="name" />
                                             <YAxis domain={[0, 100]} />
-                                            <Tooltip formatter={(value) => `${value.toFixed(1)}%`} />
+                                            <Tooltip formatter={(value: number | string) => `${typeof value === 'number' ? value.toFixed(1) : value}%`} />
                                             <Bar dataKey="value" radius={[8, 8, 0, 0]}>
                                                 {metricsData.map((entry, index) => (
                                                     <Cell key={`cell-${index}`} fill={colors[index]} />
