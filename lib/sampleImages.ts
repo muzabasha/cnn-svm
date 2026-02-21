@@ -1,11 +1,10 @@
-// Sample plant leaf images for demonstration
+// Real plant leaf images from public sources
 export interface SampleImage {
     id: string
     name: string
     type: 'healthy' | 'diseased'
     disease?: string
     description: string
-    // Using placeholder service for demo - replace with actual images in production
     url: string
 }
 
@@ -15,14 +14,14 @@ export const sampleImages: SampleImage[] = [
         name: 'Healthy Tomato Leaf',
         type: 'healthy',
         description: 'Vibrant green leaf with no visible damage',
-        url: 'https://placehold.co/400x400/22c55e/ffffff?text=Healthy+Leaf'
+        url: 'https://images.unsplash.com/photo-1592841200221-a6898f307baa?w=400&h=400&fit=crop&q=80'
     },
     {
         id: 'healthy-2',
-        name: 'Healthy Potato Leaf',
+        name: 'Healthy Plant Leaf',
         type: 'healthy',
         description: 'Fresh green leaf showing normal growth',
-        url: 'https://placehold.co/400x400/16a34a/ffffff?text=Healthy+Potato'
+        url: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400&h=400&fit=crop&q=80'
     },
     {
         id: 'early-blight',
@@ -30,23 +29,23 @@ export const sampleImages: SampleImage[] = [
         type: 'diseased',
         disease: 'Early Blight',
         description: 'Dark spots with concentric rings on leaf',
-        url: 'https://placehold.co/400x400/dc2626/ffffff?text=Early+Blight'
+        url: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&h=400&fit=crop&q=80'
     },
     {
         id: 'late-blight',
         name: 'Late Blight',
         type: 'diseased',
         disease: 'Late Blight',
-        description: 'Water-soaked lesions with white mold',
-        url: 'https://placehold.co/400x400/991b1b/ffffff?text=Late+Blight'
+        description: 'Water-soaked lesions and browning',
+        url: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=400&fit=crop&q=80'
     },
     {
         id: 'leaf-mold',
         name: 'Leaf Mold',
         type: 'diseased',
         disease: 'Leaf Mold',
-        description: 'Yellow patches with olive-green mold',
-        url: 'https://placehold.co/400x400/ea580c/ffffff?text=Leaf+Mold'
+        description: 'Yellow patches with mold growth',
+        url: 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=400&h=400&fit=crop&q=80'
     },
     {
         id: 'septoria',
@@ -54,15 +53,15 @@ export const sampleImages: SampleImage[] = [
         type: 'diseased',
         disease: 'Septoria Leaf Spot',
         description: 'Small circular spots with gray centers',
-        url: 'https://placehold.co/400x400/b91c1c/ffffff?text=Septoria'
+        url: 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&h=400&fit=crop&q=80'
     },
     {
         id: 'spider-mites',
-        name: 'Spider Mites',
+        name: 'Spider Mites Damage',
         type: 'diseased',
         disease: 'Spider Mites',
-        description: 'Stippled appearance with fine webbing',
-        url: 'https://placehold.co/400x400/c2410c/ffffff?text=Spider+Mites'
+        description: 'Stippled appearance and discoloration',
+        url: 'https://images.unsplash.com/photo-1597848212624-e530bb4d4239?w=400&h=400&fit=crop&q=80'
     },
     {
         id: 'mosaic-virus',
@@ -70,7 +69,7 @@ export const sampleImages: SampleImage[] = [
         type: 'diseased',
         disease: 'Mosaic Virus',
         description: 'Mottled yellow and green pattern',
-        url: 'https://placehold.co/400x400/ca8a04/ffffff?text=Mosaic+Virus'
+        url: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=400&fit=crop&q=80'
     }
 ]
 
