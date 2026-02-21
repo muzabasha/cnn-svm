@@ -11,6 +11,12 @@ interface Task {
 
 const tasks: Task[] = [
     {
+        id: 'enhanced',
+        title: '🌟 Learn by Doing',
+        description: 'Interactive exploration with challenges',
+        icon: '⚡'
+    },
+    {
         id: 'distance',
         title: 'Distance Metrics',
         description: 'Compare Euclidean, Manhattan, and Minkowski',
@@ -43,13 +49,17 @@ interface KNNTaskSelectorProps {
 
 export function KNNTaskSelector({ selectedTask, onSelectTask }: KNNTaskSelectorProps) {
     return (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
             {tasks.map((task) => (
                 <Card
                     key={task.id}
-                    className={`p-4 sm:p-6 cursor-pointer transition-all hover:shadow-lg active:scale-98 ${selectedTask === task.id
-                            ? 'ring-2 ring-green-500 bg-green-50'
-                            : 'hover:bg-gray-50'
+                    className={`p-4 sm:p-6 cursor-pointer transition-all hover:shadow-lg active:scale-98 ${task.id === 'enhanced'
+                            ? selectedTask === task.id
+                                ? 'ring-2 ring-yellow-500 bg-gradient-to-br from-yellow-50 to-orange-50'
+                                : 'bg-gradient-to-br from-yellow-50 to-orange-50 hover:shadow-xl'
+                            : selectedTask === task.id
+                                ? 'ring-2 ring-green-500 bg-green-50'
+                                : 'hover:bg-gray-50'
                         }`}
                     onClick={() => onSelectTask(task.id)}
                 >

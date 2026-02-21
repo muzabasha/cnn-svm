@@ -6,12 +6,15 @@ import { DistanceMetrics } from '@/components/knn/DistanceMetrics'
 import { KValueExplorer } from '@/components/knn/KValueExplorer'
 import { WeightedVoting } from '@/components/knn/WeightedVoting'
 import { InteractiveClassifier } from '@/components/knn/InteractiveClassifier'
+import { EnhancedInteractiveClassifier } from '@/components/knn/EnhancedInteractiveClassifier'
 
 export default function KNNPage() {
-    const [selectedTask, setSelectedTask] = useState('distance')
+    const [selectedTask, setSelectedTask] = useState('enhanced')
 
     const renderTask = () => {
         switch (selectedTask) {
+            case 'enhanced':
+                return <EnhancedInteractiveClassifier />
             case 'distance':
                 return <DistanceMetrics />
             case 'kvalue':
@@ -21,7 +24,7 @@ export default function KNNPage() {
             case 'interactive':
                 return <InteractiveClassifier />
             default:
-                return <DistanceMetrics />
+                return <EnhancedInteractiveClassifier />
         }
     }
 

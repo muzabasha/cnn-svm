@@ -6,12 +6,15 @@ import { ClusteringVisualization } from '@/components/kmeans/ClusteringVisualiza
 import { CentroidEvolution } from '@/components/kmeans/CentroidEvolution'
 import { ElbowMethod } from '@/components/kmeans/ElbowMethod'
 import { InitializationMethods } from '@/components/kmeans/InitializationMethods'
+import { EnhancedClusteringVisualization } from '@/components/kmeans/EnhancedClusteringVisualization'
 
 export default function KMeansPage() {
-    const [selectedTask, setSelectedTask] = useState('clustering')
+    const [selectedTask, setSelectedTask] = useState('enhanced')
 
     const renderTask = () => {
         switch (selectedTask) {
+            case 'enhanced':
+                return <EnhancedClusteringVisualization />
             case 'clustering':
                 return <ClusteringVisualization />
             case 'centroid':
@@ -21,7 +24,7 @@ export default function KMeansPage() {
             case 'initialization':
                 return <InitializationMethods />
             default:
-                return <ClusteringVisualization />
+                return <EnhancedClusteringVisualization />
         }
     }
 
