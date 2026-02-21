@@ -7,12 +7,15 @@ import { BackpropagationViz } from '@/components/ann/BackpropagationViz'
 import { NetworkArchitecture } from '@/components/ann/NetworkArchitecture'
 import { GradientDescent } from '@/components/ann/GradientDescent'
 import { ActivationFunctions } from '@/components/ann/ActivationFunctions'
+import { EnhancedNetworkBuilder } from '@/components/ann/EnhancedNetworkBuilder'
 
 export default function ANNPage() {
-    const [selectedTask, setSelectedTask] = useState('neuron')
+    const [selectedTask, setSelectedTask] = useState('enhanced')
 
     const renderTask = () => {
         switch (selectedTask) {
+            case 'enhanced':
+                return <EnhancedNetworkBuilder />
             case 'neuron':
                 return <NeuronActivation />
             case 'backprop':
@@ -24,7 +27,7 @@ export default function ANNPage() {
             case 'activation':
                 return <ActivationFunctions />
             default:
-                return <NeuronActivation />
+                return <EnhancedNetworkBuilder />
         }
     }
 

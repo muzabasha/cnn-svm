@@ -11,6 +11,12 @@ interface Task {
 
 const tasks: Task[] = [
     {
+        id: 'enhanced',
+        title: '⚡ Learn by Doing',
+        description: 'Interactive boundary playground with challenges',
+        icon: '🎯'
+    },
+    {
         id: 'sigmoid',
         title: 'Sigmoid Function',
         description: 'Understand the logistic activation',
@@ -43,13 +49,13 @@ interface LogisticRegressionTaskSelectorProps {
 
 export function LogisticRegressionTaskSelector({ selectedTask, onSelectTask }: LogisticRegressionTaskSelectorProps) {
     return (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
             {tasks.map((task) => (
                 <Card
                     key={task.id}
                     className={`p-4 sm:p-6 cursor-pointer transition-all hover:shadow-lg active:scale-98 ${selectedTask === task.id
-                            ? 'ring-2 ring-purple-500 bg-purple-50'
-                            : 'hover:bg-gray-50'
+                        ? 'ring-2 ring-purple-500 bg-purple-50'
+                        : 'hover:bg-gray-50'
                         }`}
                     onClick={() => onSelectTask(task.id)}
                 >

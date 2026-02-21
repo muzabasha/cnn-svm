@@ -1,7 +1,7 @@
 'use client'
 
 import { Card, CardContent } from '@/components/ui/card'
-import { Calculator, Percent, MessageSquare, GitBranch } from 'lucide-react'
+import { Calculator, Percent, MessageSquare, GitBranch, Zap } from 'lucide-react'
 
 interface Props {
     activeModule: string
@@ -10,6 +10,14 @@ interface Props {
 
 export function NaiveBayesTaskSelector({ activeModule, onModuleChange }: Props) {
     const modules = [
+        {
+            id: 'enhanced',
+            name: '⚡ Learn by Doing',
+            icon: Zap,
+            description: 'Interactive text classification with challenges',
+            color: 'bg-gradient-to-br from-yellow-400 to-orange-500',
+            enhanced: true
+        },
         {
             id: 'bayes-theorem',
             name: 'Bayes\' Theorem',
@@ -48,8 +56,8 @@ export function NaiveBayesTaskSelector({ activeModule, onModuleChange }: Props) 
                     <Card
                         key={module.id}
                         className={`cursor-pointer transition-all hover:shadow-lg ${activeModule === module.id
-                                ? 'ring-2 ring-purple-500 shadow-lg'
-                                : 'hover:ring-2 hover:ring-purple-300'
+                            ? 'ring-2 ring-purple-500 shadow-lg'
+                            : 'hover:ring-2 hover:ring-purple-300'
                             }`}
                         onClick={() => onModuleChange(module.id)}
                     >

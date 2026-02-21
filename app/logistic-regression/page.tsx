@@ -6,12 +6,15 @@ import { SigmoidFunction } from '@/components/logistic-regression/SigmoidFunctio
 import { DecisionBoundary } from '@/components/logistic-regression/DecisionBoundary'
 import { CostFunction } from '@/components/logistic-regression/CostFunction'
 import { MulticlassClassification } from '@/components/logistic-regression/MulticlassClassification'
+import { EnhancedBoundaryPlayground } from '@/components/logistic-regression/EnhancedBoundaryPlayground'
 
 export default function LogisticRegressionPage() {
-    const [selectedTask, setSelectedTask] = useState('sigmoid')
+    const [selectedTask, setSelectedTask] = useState('enhanced')
 
     const renderTask = () => {
         switch (selectedTask) {
+            case 'enhanced':
+                return <EnhancedBoundaryPlayground />
             case 'sigmoid':
                 return <SigmoidFunction />
             case 'boundary':
@@ -21,7 +24,7 @@ export default function LogisticRegressionPage() {
             case 'multiclass':
                 return <MulticlassClassification />
             default:
-                return <SigmoidFunction />
+                return <EnhancedBoundaryPlayground />
         }
     }
 

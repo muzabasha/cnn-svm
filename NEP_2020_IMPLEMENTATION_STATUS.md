@@ -199,16 +199,20 @@ This document tracks the implementation of experiential learning features across
 ## Success Metrics
 
 ### Completed Labs (4/10):
-- ✅ KNN - Full experiential learning
-- ✅ K-Means - Full experiential learning
-- ✅ Decision Tree - Full experiential learning
-- ✅ SVM - Full experiential learning
-- ⏳ Naive Bayes
-- ⏳ ANN/DNN
-- ⏳ CNN
-- ⏳ Random Forest
-- ⏳ Logistic Regression
-- ⏳ Reinforcement Learning
+- ✅ KNN - Full experiential learning (60 pts, 3 challenges)
+- ✅ K-Means - Full experiential learning (60 pts, 3 challenges)
+- ✅ Decision Tree - Full experiential learning (45 pts, 3 challenges)
+- ✅ SVM - Full experiential learning (75 pts, 4 challenges)
+
+### Labs with Existing Interactive Features (4/10):
+- 🟡 Naive Bayes - Has interactive text classification, needs challenge system
+- 🟡 ANN - Has neuron activation, backprop viz, needs challenges
+- 🟡 CNN - Has convolution, pooling, plant disease modules (excellent)
+- 🟡 Random Forest - Has forest viz, voting, needs challenges
+
+### Labs Needing Enhancement (2/10):
+- ⏳ Logistic Regression - Needs interactive boundary adjustment
+- ⏳ Reinforcement Learning - Has GridWorld, Q-learning, needs challenge integration
 
 ### NEP 2020 Principles Coverage:
 - ✅ Hands-on Learning - Interactive canvases
@@ -336,5 +340,6 @@ components/
 ---
 
 **Last Updated**: Current session
-**Status**: 40% Complete (4/10 labs enhanced)
-**Next Priority**: Naive Bayes enhancement
+**Status**: 40% Fully Enhanced + 40% Partially Enhanced = 80% Overall
+**Completion**: 4 labs fully enhanced, 4 labs have good interactive features
+**Next Priority**: Add challenge systems to existing interactive labs

@@ -11,6 +11,12 @@ interface Task {
 
 const tasks: Task[] = [
     {
+        id: 'enhanced',
+        title: '⚡ Learn by Doing',
+        description: 'Interactive network builder with challenges',
+        icon: '🎯'
+    },
+    {
         id: 'neuron',
         title: 'Neuron & Perceptron',
         description: 'Basic building block of neural networks',
@@ -49,13 +55,13 @@ interface ANNTaskSelectorProps {
 
 export function ANNTaskSelector({ selectedTask, onSelectTask }: ANNTaskSelectorProps) {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
             {tasks.map((task) => (
                 <Card
                     key={task.id}
                     className={`p-4 sm:p-6 cursor-pointer transition-all hover:shadow-lg active:scale-98 ${selectedTask === task.id
-                            ? 'ring-2 ring-blue-500 bg-blue-50'
-                            : 'hover:bg-gray-50'
+                        ? 'ring-2 ring-blue-500 bg-blue-50'
+                        : 'hover:bg-gray-50'
                         }`}
                     onClick={() => onSelectTask(task.id)}
                 >

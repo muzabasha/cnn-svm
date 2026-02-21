@@ -6,9 +6,10 @@ import { BayesTheorem } from '@/components/naive-bayes/BayesTheorem'
 import { ProbabilityCalculator } from '@/components/naive-bayes/ProbabilityCalculator'
 import { TextClassification } from '@/components/naive-bayes/TextClassification'
 import { ConditionalProbability } from '@/components/naive-bayes/ConditionalProbability'
+import { EnhancedTextClassification } from '@/components/naive-bayes/EnhancedTextClassification'
 
 export default function NaiveBayesLab() {
-    const [activeModule, setActiveModule] = useState<string>('bayes-theorem')
+    const [activeModule, setActiveModule] = useState<string>('enhanced')
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-indigo-50">
@@ -28,6 +29,7 @@ export default function NaiveBayesLab() {
                 />
 
                 <div className="mt-6">
+                    {activeModule === 'enhanced' && <EnhancedTextClassification />}
                     {activeModule === 'bayes-theorem' && <BayesTheorem />}
                     {activeModule === 'probability' && <ProbabilityCalculator />}
                     {activeModule === 'text-classification' && <TextClassification />}
