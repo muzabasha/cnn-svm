@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Brain, Network, TreeDeciduous, Calculator, Trees, User, TrendingUp, Users, Target, BarChart3 } from 'lucide-react'
+import { Brain, Network, TreeDeciduous, Calculator, Trees, User, TrendingUp, Users, Target, BarChart3, MessageSquare } from 'lucide-react'
 
 export default function Home() {
     return (
@@ -202,6 +202,26 @@ export default function Home() {
                                 <li>✓ Feature scaling techniques</li>
                                 <li>✓ Polynomial features</li>
                                 <li>✓ Regularization (Ridge, Lasso)</li>
+                            </ul>
+                        </div>
+                    </Link>
+
+                    <Link href="/nlp">
+                        <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-all cursor-pointer group active:scale-98">
+                            <div className="flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-indigo-100 rounded-xl sm:rounded-2xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
+                                <MessageSquare className="w-7 h-7 sm:w-8 sm:h-8 text-indigo-600" />
+                            </div>
+                            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 sm:mb-3">
+                                NLP & Language Models Lab
+                            </h2>
+                            <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
+                                Explore modern natural language processing
+                            </p>
+                            <ul className="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-500">
+                                <li>✓ Word embeddings & semantic spaces</li>
+                                <li>✓ Attention mechanisms</li>
+                                <li>✓ Transformer architecture (BERT/GPT)</li>
+                                <li>✓ Tokenization & sentiment analysis</li>
                             </ul>
                         </div>
                     </Link>
