@@ -31,8 +31,8 @@ export default function Home() {
                         <button
                             onClick={() => setViewMode('mindmap')}
                             className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl transition-all shadow-lg ${viewMode === 'mindmap'
-                                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
-                                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                                ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
+                                : 'bg-white text-gray-700 hover:bg-gray-50'
                                 }`}
                         >
                             <Map className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -41,8 +41,8 @@ export default function Home() {
                         <button
                             onClick={() => setViewMode('grid')}
                             className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl transition-all shadow-lg ${viewMode === 'grid'
-                                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
-                                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                                ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
+                                : 'bg-white text-gray-700 hover:bg-gray-50'
                                 }`}
                         >
                             <Brain className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -67,6 +67,45 @@ function LearningJourneyMindMap() {
     const [expandedLevel, setExpandedLevel] = useState<number | null>(null)
 
     const levels = [
+        {
+            level: 0,
+            title: "🧑‍🎓 Kitchen Prep: Before You Start",
+            subtitle: "Setting up your kitchen and understanding basics",
+            description: "Before cooking, every chef learns knife skills, measurements, and ingredient prep. These are your foundational skills!",
+            color: "from-pink-400 to-rose-500",
+            bgColor: "bg-pink-50",
+            borderColor: "border-pink-300",
+            labs: [
+                {
+                    name: "Math Basics",
+                    icon: <Calculator className="w-6 h-6" />,
+                    link: "/math-basics",
+                    analogy: "🧮 Kitchen Math",
+                    description: "Vectors, derivatives, probability - the math behind cooking!"
+                },
+                {
+                    name: "Data Exploration",
+                    icon: <Target className="w-6 h-6" />,
+                    link: "/data-exploration",
+                    analogy: "🔍 Inspect Ingredients",
+                    description: "Look at your data: What do you have? What's it look like?"
+                },
+                {
+                    name: "Data Preprocessing",
+                    icon: <TreeDeciduous className="w-6 h-6" />,
+                    link: "/data-preprocessing",
+                    analogy: "🧹 Prep & Clean",
+                    description: "Wash, chop, measure - get your data ready to cook!"
+                },
+                {
+                    name: "Data Validation",
+                    icon: <Calculator className="w-6 h-6" />,
+                    link: "/data-validation",
+                    analogy: "✅ Quality Check",
+                    description: "Taste test! Make sure everything is fresh and correct"
+                }
+            ]
+        },
         {
             level: 1,
             title: "🥚 Apprentice: Basic Ingredients",
@@ -359,8 +398,8 @@ function AllLabsGrid() {
                                 {lab.name}
                             </h2>
                             <span className={`text-xs px-2 py-1 rounded-full ${lab.level === 'Beginner' ? 'bg-green-100 text-green-700' :
-                                    lab.level === 'Intermediate' ? 'bg-blue-100 text-blue-700' :
-                                        'bg-purple-100 text-purple-700'
+                                lab.level === 'Intermediate' ? 'bg-blue-100 text-blue-700' :
+                                    'bg-purple-100 text-purple-700'
                                 }`}>
                                 {lab.level}
                             </span>
