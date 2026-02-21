@@ -41,12 +41,10 @@ export function BayesTheorem() {
 
                             <div className="space-y-6">
                                 <div>
-                                    <label className="text-sm font-medium mb-2 block">
-                                        Disease Prevalence (Prior): {(priorDisease * 100).toFixed(1)}%
-                                    </label>
                                     <Slider
-                                        value={[priorDisease * 100]}
-                                        onValueChange={(v) => setPriorDisease(v[0] / 100)}
+                                        label={`Disease Prevalence (Prior): ${(priorDisease * 100).toFixed(1)}%`}
+                                        value={priorDisease * 100}
+                                        onChange={(v) => setPriorDisease(v / 100)}
                                         min={0.1}
                                         max={10}
                                         step={0.1}
@@ -57,12 +55,10 @@ export function BayesTheorem() {
                                 </div>
 
                                 <div>
-                                    <label className="text-sm font-medium mb-2 block">
-                                        Test Sensitivity: {(sensitivity * 100).toFixed(0)}%
-                                    </label>
                                     <Slider
-                                        value={[sensitivity * 100]}
-                                        onValueChange={(v) => setSensitivity(v[0] / 100)}
+                                        label={`Test Sensitivity: ${(sensitivity * 100).toFixed(0)}%`}
+                                        value={sensitivity * 100}
+                                        onChange={(v) => setSensitivity(v / 100)}
                                         min={50}
                                         max={100}
                                         step={1}
@@ -73,12 +69,10 @@ export function BayesTheorem() {
                                 </div>
 
                                 <div>
-                                    <label className="text-sm font-medium mb-2 block">
-                                        Test Specificity: {(specificity * 100).toFixed(0)}%
-                                    </label>
                                     <Slider
-                                        value={[specificity * 100]}
-                                        onValueChange={(v) => setSpecificity(v[0] / 100)}
+                                        label={`Test Specificity: ${(specificity * 100).toFixed(0)}%`}
+                                        value={specificity * 100}
+                                        onChange={(v) => setSpecificity(v / 100)}
                                         min={50}
                                         max={100}
                                         step={1}

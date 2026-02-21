@@ -77,35 +77,27 @@ export function PruningModule() {
 
                                 <div className="space-y-4">
                                     <div>
-                                        <label className="text-sm font-medium mb-2 block">
-                                            Max Depth: {maxDepth}
-                                        </label>
                                         <Slider
-                                            value={[maxDepth]}
-                                            onValueChange={(v) => setMaxDepth(v[0])}
+                                            label={`Max Depth: ${maxDepth}`}
+                                            value={maxDepth}
+                                            onChange={setMaxDepth}
                                             min={1}
                                             max={10}
                                             step={1}
+                                            description={`Stop growing tree after ${maxDepth} levels`}
                                         />
-                                        <p className="text-xs text-gray-600 mt-1">
-                                            Stop growing tree after {maxDepth} levels
-                                        </p>
                                     </div>
 
                                     <div>
-                                        <label className="text-sm font-medium mb-2 block">
-                                            Min Samples per Leaf: {minSamples}
-                                        </label>
                                         <Slider
-                                            value={[minSamples]}
-                                            onValueChange={(v) => setMinSamples(v[0])}
+                                            label={`Min Samples per Leaf: ${minSamples}`}
+                                            value={minSamples}
+                                            onChange={setMinSamples}
                                             min={1}
                                             max={20}
                                             step={1}
+                                            description={`Require at least ${minSamples} samples to create a leaf`}
                                         />
-                                        <p className="text-xs text-gray-600 mt-1">
-                                            Require at least {minSamples} samples to create a leaf
-                                        </p>
                                     </div>
                                 </div>
 

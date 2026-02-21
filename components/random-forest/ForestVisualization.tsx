@@ -56,16 +56,13 @@ export function ForestVisualization() {
 
                     <div className="bg-white border-2 border-gray-200 rounded-xl p-6">
                         <div className="mb-6">
-                            <label className="text-sm font-medium mb-2 block">
-                                Number of Trees: {numTrees}
-                            </label>
                             <Slider
-                                value={[numTrees]}
-                                onValueChange={(v) => setNumTrees(v[0])}
+                                label={`Number of Trees: ${numTrees}`}
+                                value={numTrees}
+                                onChange={setNumTrees}
                                 min={3}
                                 max={10}
                                 step={1}
-                                disabled={isAnimating}
                             />
                         </div>
 
@@ -85,10 +82,10 @@ export function ForestVisualization() {
                                 <div
                                     key={i}
                                     className={`p-4 rounded-xl border-2 transition-all ${predictions[i]
-                                            ? predictions[i] === 'Yes'
-                                                ? 'bg-green-50 border-green-500'
-                                                : 'bg-red-50 border-red-500'
-                                            : 'bg-gray-50 border-gray-200'
+                                        ? predictions[i] === 'Yes'
+                                            ? 'bg-green-50 border-green-500'
+                                            : 'bg-red-50 border-red-500'
+                                        : 'bg-gray-50 border-gray-200'
                                         }`}
                                 >
                                     <div className="text-center">
