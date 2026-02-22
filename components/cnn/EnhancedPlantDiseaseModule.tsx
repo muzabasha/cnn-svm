@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Play, Pause, RotateCcw, ChevronRight, ChevronLeft } from 'lucide-react'
-import { BlockMath, InlineMath } from 'react-katex'
+import { BlockMath } from 'react-katex'
 import 'katex/dist/katex.min.css'
 
 // Synthetic plant disease images (base64 encoded simple patterns)
@@ -61,6 +61,65 @@ export function EnhancedPlantDiseaseModule() {
     const [isAnimating, setIsAnimating] = useState(false)
     const [animationSpeed, setAnimationSpeed] = useState(2000)
     const [showMath, setShowMath] = useState(true)
+    const [showPixelValues, setShowPixelValues] = useState(true)
+
+    // Generate sample pixel values for visualization
+    const generateInputPixels = () => {
+        const pixels: number[][] = []
+        for (let i = 0; i < 8; i++) {
+            const row: number[] = []
+            for (let j = 0; j < 8; j++) {
+                // Simulate RGB values based on selected image
+                const baseValue = selectedImage?.type === 'healthy' ? 0.6 : 0.4
+                row.push(Number((baseValue + Math.random() * 0.3).toFixed(2)))
+            }
+            pixels.push(row)
+        }
+        return pixels
+    }
+
+    const generateConvPixels = () => {
+        const pixels: number[][] = []
+        for (let i = 0; i < 6; i++) {
+            const row: number[] = []
+            for (let j = 0; j < 6; j++) {
+                // After ReLU, values are positive
+                row.push(Number((Math.random() * 0.9).toFixed(2)))
+            }
+            pixels.push(row)
+        }
+        return pixels
+    }
+
+    const generatePoolPixels = () => {
+        const pixels: number[][] = []
+        for (let i = 0; i < 3; i++) {
+            const row: number[] = []
+            for (let j = 0; j < 3; j++) {
+                // Max pooling selects maximum values
+                row.push(Number((0.5 + Math.random() * 0.5).toFixed(2)))
+            }
+            pixels.push(row)
+        }
+        return pixels
+    }
+
+    const generateFlattenValues = () => {
+        const values: number[] = []
+        for (let i = 0; i < 24; i++) {
+            values.push(Number((Math.random() * 0.9).toFixed(2)))
+        }
+        return values
+    }
+
+    const generateDenseValues = () => {
+        const values: number[] = []
+        for (let i = 0; i < 16; i++) {
+            // After ReLU, some values are zero
+            values.push(Math.random() > 0.3 ? Number((Math.random() * 0.8).toFixed(2)) : 0)
+        }
+        return values
+    }
 
     const steps: ProcessingStep[] = ['input', 'conv1', 'pool1', 'conv2', 'pool2', 'flatten', 'dense', 'output']
 
@@ -355,65 +414,242 @@ export function EnhancedPlantDiseaseModule() {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         {/* Visual Representation */}
                                         <div className="bg-white rounded-lg p-4">
-                                            <h5 className="font-semibold mb-3">Visual Representation</h5>
+                                            <div className="flex justify-between items-center mb-3">
+                                                <h5 className="font-semibold">Visual Representation</h5>
+                                                <button
+                                                    onClick={() => setShowPixelValues(!showPixelValues)}
+                                                    className="text-xs px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded"
+                                                >
+                                                    {showPixelValues ? 'Hide Values' : 'Show Values'}
+                                                </button>
+                                            </div>
+
                                             {currentStep === 'input' && (
-                                                <div className="flex justify-center">
-                                                    <img
-                                                        src={generateSyntheticImage(selectedImage)}
-                                                        alt="Input"
-                                                        className="w-48 h-48 rounded-lg border-2 border-gray-300"
-                                                    />
-                                                </div>
-                                            )}
-                                            {(currentStep === 'conv1' || currentStep === 'conv2') && (
-                                                <div className="grid grid-cols-4 gap-2">
-                                                    {[...Array(16)].map((_, i) => (
-                                                        <div
-                                                            key={i}
-                                                            className="aspect-square rounded bg-gradient-to-br from-blue-400 to-purple-600"
-                                                            style={{
-                                                                opacity: 0.3 + Math.random() * 0.7,
-                                                                animation: `pulse ${1 + Math.random()}s infinite`
-                                                            }}
-                                                        ></div>
-                                                    ))}
-                                                </div>
-                                            )}
-                                            {(currentStep === 'pool1' || currentStep === 'pool2') && (
-                                                <div className="grid grid-cols-3 gap-3">
-                                                    {[...Array(9)].map((_, i) => (
-                                                        <div
-                                                            key={i}
-                                                            className="aspect-square rounded bg-gradient-to-br from-green-400 to-teal-600"
-                                                            style={{ opacity: 0.4 + Math.random() * 0.6 }}
-                                                        ></div>
-                                                    ))}
-                                                </div>
-                                            )}
-                                            {currentStep === 'flatten' && (
-                                                <div className="flex flex-col gap-1">
-                                                    {[...Array(12)].map((_, i) => (
-                                                        <div
-                                                            key={i}
-                                                            className="h-3 rounded bg-gradient-to-r from-orange-400 to-red-600"
-                                                            style={{ width: `${60 + Math.random() * 40}%` }}
-                                                        ></div>
-                                                    ))}
-                                                </div>
-                                            )}
-                                            {currentStep === 'dense' && (
-                                                <div className="flex justify-center items-center h-48">
-                                                    <div className="grid grid-cols-8 gap-2">
-                                                        {[...Array(64)].map((_, i) => (
-                                                            <div
-                                                                key={i}
-                                                                className="w-2 h-2 rounded-full bg-purple-600"
-                                                                style={{ opacity: 0.3 + Math.random() * 0.7 }}
-                                                            ></div>
-                                                        ))}
+                                                <div>
+                                                    <div className="flex justify-center mb-3">
+                                                        <img
+                                                            src={generateSyntheticImage(selectedImage)}
+                                                            alt="Input"
+                                                            className="w-32 h-32 rounded-lg border-2 border-gray-300"
+                                                        />
                                                     </div>
+                                                    {showPixelValues && (
+                                                        <div className="mt-3">
+                                                            <p className="text-xs font-semibold mb-2 text-gray-700">Sample 8×8 Pixel Values (Normalized RGB):</p>
+                                                            <div className="overflow-x-auto">
+                                                                <table className="text-xs border-collapse">
+                                                                    <tbody>
+                                                                        {generateInputPixels().map((row, i) => (
+                                                                            <tr key={i}>
+                                                                                {row.map((val, j) => (
+                                                                                    <td
+                                                                                        key={j}
+                                                                                        className="border border-gray-300 px-1 py-0.5 text-center font-mono"
+                                                                                        style={{
+                                                                                            backgroundColor: `rgba(74, 222, 128, ${val})`,
+                                                                                            color: val > 0.5 ? 'white' : 'black'
+                                                                                        }}
+                                                                                    >
+                                                                                        {val}
+                                                                                    </td>
+                                                                                ))}
+                                                                            </tr>
+                                                                        ))}
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <p className="text-xs text-gray-500 mt-2">
+                                                                Values range from 0.0 (dark) to 1.0 (bright). Actual image is 224×224×3.
+                                                            </p>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             )}
+
+                                            {(currentStep === 'conv1' || currentStep === 'conv2') && (
+                                                <div>
+                                                    <div className="grid grid-cols-4 gap-2 mb-3">
+                                                        {[...Array(16)].map((_, i) => {
+                                                            const intensity = 0.3 + Math.random() * 0.7
+                                                            return (
+                                                                <div
+                                                                    key={i}
+                                                                    className="aspect-square rounded bg-gradient-to-br from-blue-400 to-purple-600 flex items-center justify-center text-white text-xs font-bold"
+                                                                    style={{ opacity: intensity }}
+                                                                >
+                                                                    {showPixelValues && `F${i + 1}`}
+                                                                </div>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                    {showPixelValues && (
+                                                        <div className="mt-3">
+                                                            <p className="text-xs font-semibold mb-2 text-gray-700">Sample Feature Map (6×6 after Conv + ReLU):</p>
+                                                            <div className="overflow-x-auto">
+                                                                <table className="text-xs border-collapse">
+                                                                    <tbody>
+                                                                        {generateConvPixels().map((row, i) => (
+                                                                            <tr key={i}>
+                                                                                {row.map((val, j) => (
+                                                                                    <td
+                                                                                        key={j}
+                                                                                        className="border border-gray-300 px-1 py-0.5 text-center font-mono"
+                                                                                        style={{
+                                                                                            backgroundColor: `rgba(59, 130, 246, ${val})`,
+                                                                                            color: val > 0.5 ? 'white' : 'black'
+                                                                                        }}
+                                                                                    >
+                                                                                        {val}
+                                                                                    </td>
+                                                                                ))}
+                                                                            </tr>
+                                                                        ))}
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <p className="text-xs text-gray-500 mt-2">
+                                                                After ReLU: all negative values → 0. Showing 1 of {currentStep === 'conv1' ? '32' : '64'} feature maps.
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
+
+                                            {(currentStep === 'pool1' || currentStep === 'pool2') && (
+                                                <div>
+                                                    <div className="grid grid-cols-3 gap-3 mb-3">
+                                                        {[...Array(9)].map((_, i) => {
+                                                            const intensity = 0.4 + Math.random() * 0.6
+                                                            return (
+                                                                <div
+                                                                    key={i}
+                                                                    className="aspect-square rounded bg-gradient-to-br from-green-400 to-teal-600 flex items-center justify-center text-white text-xs font-bold"
+                                                                    style={{ opacity: intensity }}
+                                                                >
+                                                                    {showPixelValues && `P${i + 1}`}
+                                                                </div>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                    {showPixelValues && (
+                                                        <div className="mt-3">
+                                                            <p className="text-xs font-semibold mb-2 text-gray-700">Sample After Max Pooling (3×3):</p>
+                                                            <div className="overflow-x-auto">
+                                                                <table className="text-xs border-collapse">
+                                                                    <tbody>
+                                                                        {generatePoolPixels().map((row, i) => (
+                                                                            <tr key={i}>
+                                                                                {row.map((val, j) => (
+                                                                                    <td
+                                                                                        key={j}
+                                                                                        className="border border-gray-300 px-2 py-1 text-center font-mono"
+                                                                                        style={{
+                                                                                            backgroundColor: `rgba(34, 197, 94, ${val})`,
+                                                                                            color: 'white'
+                                                                                        }}
+                                                                                    >
+                                                                                        {val}
+                                                                                    </td>
+                                                                                ))}
+                                                                            </tr>
+                                                                        ))}
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <p className="text-xs text-gray-500 mt-2">
+                                                                Max pooling selects maximum from each 2×2 region. Size reduced by 50%.
+                                                            </p>
+                                                            <div className="mt-2 p-2 bg-blue-50 rounded text-xs">
+                                                                <strong>Example:</strong> From [0.3, 0.7, 0.5, 0.4] → max = 0.7
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
+
+                                            {currentStep === 'flatten' && (
+                                                <div>
+                                                    <div className="flex flex-col gap-1 mb-3">
+                                                        {[...Array(12)].map((_, i) => {
+                                                            const width = 60 + Math.random() * 40
+                                                            return (
+                                                                <div
+                                                                    key={i}
+                                                                    className="h-3 rounded bg-gradient-to-r from-orange-400 to-red-600"
+                                                                    style={{ width: `${width}%` }}
+                                                                ></div>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                    {showPixelValues && (
+                                                        <div className="mt-3">
+                                                            <p className="text-xs font-semibold mb-2 text-gray-700">Sample Flattened Vector (24 values shown):</p>
+                                                            <div className="grid grid-cols-8 gap-1">
+                                                                {generateFlattenValues().map((val, i) => (
+                                                                    <div
+                                                                        key={i}
+                                                                        className="text-xs font-mono text-center p-1 rounded"
+                                                                        style={{
+                                                                            backgroundColor: `rgba(249, 115, 22, ${val})`,
+                                                                            color: val > 0.5 ? 'white' : 'black'
+                                                                        }}
+                                                                    >
+                                                                        {val}
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                            <p className="text-xs text-gray-500 mt-2">
+                                                                3D tensor (54×54×64) flattened to 1D vector of 186,624 values.
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
+
+                                            {currentStep === 'dense' && (
+                                                <div>
+                                                    <div className="flex justify-center items-center h-32 mb-3">
+                                                        <div className="grid grid-cols-8 gap-2">
+                                                            {[...Array(64)].map((_, i) => {
+                                                                const opacity = 0.3 + Math.random() * 0.7
+                                                                return (
+                                                                    <div
+                                                                        key={i}
+                                                                        className="w-2 h-2 rounded-full bg-purple-600"
+                                                                        style={{ opacity }}
+                                                                    ></div>
+                                                                )
+                                                            })}
+                                                        </div>
+                                                    </div>
+                                                    {showPixelValues && (
+                                                        <div className="mt-3">
+                                                            <p className="text-xs font-semibold mb-2 text-gray-700">Sample Dense Layer Output (16 of 128 neurons):</p>
+                                                            <div className="grid grid-cols-8 gap-1">
+                                                                {generateDenseValues().map((val, i) => (
+                                                                    <div
+                                                                        key={i}
+                                                                        className={`text-xs font-mono text-center p-1 rounded ${val === 0 ? 'bg-gray-200 text-gray-500' : 'text-white'
+                                                                            }`}
+                                                                        style={{
+                                                                            backgroundColor: val > 0 ? `rgba(147, 51, 234, ${0.5 + val * 0.5})` : undefined
+                                                                        }}
+                                                                    >
+                                                                        {val}
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                            <p className="text-xs text-gray-500 mt-2">
+                                                                After ReLU + Dropout: some neurons set to 0. Full layer has 128 neurons.
+                                                            </p>
+                                                            <div className="mt-2 p-2 bg-purple-50 rounded text-xs">
+                                                                <strong>Dropout:</strong> Randomly disables 50% of neurons during training to prevent overfitting.
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
+
                                             {currentStep === 'output' && (
                                                 <div className="space-y-3">
                                                     {syntheticImages.map((img, i) => {
@@ -434,6 +670,19 @@ export function EnhancedPlantDiseaseModule() {
                                                             </div>
                                                         )
                                                     })}
+                                                    {showPixelValues && (
+                                                        <div className="mt-4 p-3 bg-green-50 rounded-lg">
+                                                            <p className="text-xs font-semibold mb-2">Softmax Calculation Example:</p>
+                                                            <div className="text-xs font-mono space-y-1">
+                                                                <div>Raw scores (logits): [2.5, 0.3, -1.2, 0.8]</div>
+                                                                <div>After exp(): [12.18, 1.35, 0.30, 2.23]</div>
+                                                                <div>Sum: 16.06</div>
+                                                                <div className="text-green-700 font-semibold">
+                                                                    Probabilities: [75.8%, 8.4%, 1.9%, 13.9%] ✓
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             )}
                                         </div>
