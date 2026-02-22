@@ -1,7 +1,7 @@
 'use client'
 
 import { Card, CardContent } from '@/components/ui/card'
-import { TreeDeciduous, GitBranch, Scissors, Hammer } from 'lucide-react'
+import { TreeDeciduous, GitBranch, Scissors, Hammer, Droplets } from 'lucide-react'
 
 interface Props {
     activeModule: string
@@ -16,6 +16,13 @@ export function DecisionTreeTaskSelector({ activeModule, onModuleChange }: Props
             icon: Hammer,
             description: 'Interactive exploration with challenges',
             color: 'bg-gradient-to-br from-yellow-400 to-orange-400'
+        },
+        {
+            id: 'irrigation',
+            name: '💧 Smart Irrigation',
+            icon: Droplets,
+            description: 'IoT system for crop watering decisions',
+            color: 'bg-blue-500'
         },
         {
             id: 'tree-viz',
@@ -48,19 +55,19 @@ export function DecisionTreeTaskSelector({ activeModule, onModuleChange }: Props
     ]
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
             {modules.map((module) => {
                 const Icon = module.icon
                 return (
                     <Card
                         key={module.id}
                         className={`cursor-pointer transition-all hover:shadow-lg ${module.id === 'enhanced'
-                                ? activeModule === module.id
-                                    ? 'ring-2 ring-yellow-500 shadow-lg'
-                                    : 'hover:ring-2 hover:ring-yellow-400 shadow-md'
-                                : activeModule === module.id
-                                    ? 'ring-2 ring-green-500 shadow-lg'
-                                    : 'hover:ring-2 hover:ring-green-300'
+                            ? activeModule === module.id
+                                ? 'ring-2 ring-yellow-500 shadow-lg'
+                                : 'hover:ring-2 hover:ring-yellow-400 shadow-md'
+                            : activeModule === module.id
+                                ? 'ring-2 ring-green-500 shadow-lg'
+                                : 'hover:ring-2 hover:ring-green-300'
                             }`}
                         onClick={() => onModuleChange(module.id)}
                     >

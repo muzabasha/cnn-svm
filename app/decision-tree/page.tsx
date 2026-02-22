@@ -7,6 +7,7 @@ import { SplittingCriteria } from '@/components/decision-tree/SplittingCriteria'
 import { PruningModule } from '@/components/decision-tree/PruningModule'
 import { InteractiveBuilder } from '@/components/decision-tree/InteractiveBuilder'
 import { EnhancedInteractiveBuilder } from '@/components/decision-tree/EnhancedInteractiveBuilder'
+import { SmartIrrigationSystem } from '@/components/decision-tree/SmartIrrigationSystem'
 
 export default function DecisionTreeLab() {
     const [activeModule, setActiveModule] = useState<string>('enhanced')
@@ -30,6 +31,7 @@ export default function DecisionTreeLab() {
 
                 <div className="mt-6">
                     {activeModule === 'enhanced' && <EnhancedInteractiveBuilder />}
+                    {activeModule === 'irrigation' && <SmartIrrigationSystem />}
                     {activeModule === 'tree-viz' && <TreeVisualization />}
                     {activeModule === 'splitting' && <SplittingCriteria />}
                     {activeModule === 'pruning' && <PruningModule />}
