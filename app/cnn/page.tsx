@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { CNNTaskSelector } from '@/components/cnn/CNNTaskSelector'
-import { PlantDiseaseModule } from '@/components/cnn/PlantDiseaseModule'
+import { EnhancedPlantDiseaseModule } from '@/components/cnn/EnhancedPlantDiseaseModule'
 import { ConvolutionModule } from '@/components/cnn/ConvolutionModule'
 import { PoolingModule } from '@/components/cnn/PoolingModule'
 import { ActivationModule } from '@/components/cnn/ActivationModule'
@@ -36,7 +36,7 @@ export default function CNNLab() {
                 </aside>
 
                 <main className="flex-1 p-6">
-                    {selectedTask === 'plant-disease' && <PlantDiseaseModule />}
+                    {selectedTask === 'plant-disease' && <EnhancedPlantDiseaseModule />}
                     {selectedTask === 'convolution' && <ConvolutionModule />}
                     {selectedTask === 'pooling' && <PoolingModule />}
                     {selectedTask === 'activation' && <ActivationModule />}
