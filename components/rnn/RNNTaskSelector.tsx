@@ -11,6 +11,12 @@ interface Task {
 
 const tasks: Task[] = [
     {
+        id: 'weather-pattern',
+        title: 'Weather Pattern Recognition',
+        description: 'Predict weather using RNN',
+        icon: '🌦️'
+    },
+    {
         id: 'sequence',
         title: 'Sequence Processing',
         description: 'How RNNs handle sequential data',
@@ -54,8 +60,8 @@ export function RNNTaskSelector({ selectedTask, onSelectTask }: RNNTaskSelectorP
                 <Card
                     key={task.id}
                     className={`p-4 sm:p-6 cursor-pointer transition-all hover:shadow-lg active:scale-98 ${selectedTask === task.id
-                            ? 'ring-2 ring-purple-500 bg-purple-50'
-                            : 'hover:bg-gray-50'
+                        ? 'ring-2 ring-purple-500 bg-purple-50'
+                        : 'hover:bg-gray-50'
                         }`}
                     onClick={() => onSelectTask(task.id)}
                 >

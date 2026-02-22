@@ -7,12 +7,15 @@ import { LSTMArchitecture } from '@/components/rnn/LSTMArchitecture'
 import { GRUComparison } from '@/components/rnn/GRUComparison'
 import { VanishingGradient } from '@/components/rnn/VanishingGradient'
 import { TimeSeriesPrediction } from '@/components/rnn/TimeSeriesPrediction'
+import { WeatherPatternRecognition } from '@/components/rnn/WeatherPatternRecognition'
 
 export default function RNNPage() {
-    const [selectedTask, setSelectedTask] = useState('sequence')
+    const [selectedTask, setSelectedTask] = useState('weather-pattern')
 
     const renderTask = () => {
         switch (selectedTask) {
+            case 'weather-pattern':
+                return <WeatherPatternRecognition />
             case 'sequence':
                 return <SequenceProcessing />
             case 'lstm':
@@ -24,7 +27,7 @@ export default function RNNPage() {
             case 'timeseries':
                 return <TimeSeriesPrediction />
             default:
-                return <SequenceProcessing />
+                return <WeatherPatternRecognition />
         }
     }
 

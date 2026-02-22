@@ -11,10 +11,22 @@ interface Task {
 
 const tasks: Task[] = [
     {
+        id: 'crop-price',
+        title: 'Crop Price Forecasting',
+        description: 'Predict agricultural prices',
+        icon: '🌾'
+    },
+    {
+        id: 'demand-prediction',
+        title: 'Demand Prediction',
+        description: 'Forecast product demand',
+        icon: '📊'
+    },
+    {
         id: 'linear',
         title: 'Linear Model',
         description: 'Multiple features regression visualization',
-        icon: '📊'
+        icon: '📈'
     },
     {
         id: 'scaling',
@@ -48,8 +60,8 @@ export function MultipleRegressionTaskSelector({ selectedTask, onSelectTask }: M
                 <Card
                     key={task.id}
                     className={`p-4 sm:p-6 cursor-pointer transition-all hover:shadow-lg active:scale-98 ${selectedTask === task.id
-                            ? 'ring-2 ring-orange-500 bg-orange-50'
-                            : 'hover:bg-gray-50'
+                        ? 'ring-2 ring-orange-500 bg-orange-50'
+                        : 'hover:bg-gray-50'
                         }`}
                     onClick={() => onSelectTask(task.id)}
                 >

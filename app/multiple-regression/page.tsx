@@ -6,12 +6,18 @@ import { LinearModel } from '@/components/multiple-regression/LinearModel'
 import { FeatureScaling } from '@/components/multiple-regression/FeatureScaling'
 import { PolynomialFeatures } from '@/components/multiple-regression/PolynomialFeatures'
 import { RegularizationTechniques } from '@/components/multiple-regression/RegularizationTechniques'
+import { CropPriceForecasting } from '@/components/multiple-regression/CropPriceForecasting'
+import { DemandPrediction } from '@/components/multiple-regression/DemandPrediction'
 
 export default function MultipleRegressionPage() {
-    const [selectedTask, setSelectedTask] = useState('linear')
+    const [selectedTask, setSelectedTask] = useState('crop-price')
 
     const renderTask = () => {
         switch (selectedTask) {
+            case 'crop-price':
+                return <CropPriceForecasting />
+            case 'demand-prediction':
+                return <DemandPrediction />
             case 'linear':
                 return <LinearModel />
             case 'scaling':
@@ -21,7 +27,7 @@ export default function MultipleRegressionPage() {
             case 'regularization':
                 return <RegularizationTechniques />
             default:
-                return <LinearModel />
+                return <CropPriceForecasting />
         }
     }
 
