@@ -11,6 +11,12 @@ interface Task {
 
 const tasks: Task[] = [
     {
+        id: 'training',
+        title: '🌟 Enhanced Training',
+        description: 'Full training with hyperparameters',
+        icon: '🎯'
+    },
+    {
         id: 'builder',
         title: 'Network Builder',
         description: 'Build custom DNNs interactively',
@@ -55,13 +61,13 @@ interface DNNTaskSelectorProps {
 
 export function DNNTaskSelector({ selectedTask, onSelectTask }: DNNTaskSelectorProps) {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3 sm:gap-4">
             {tasks.map((task) => (
                 <Card
                     key={task.id}
                     className={`p-4 sm:p-6 cursor-pointer transition-all hover:shadow-lg active:scale-98 ${selectedTask === task.id
-                            ? 'ring-2 ring-emerald-500 bg-emerald-50'
-                            : 'hover:bg-gray-50'
+                        ? 'ring-2 ring-emerald-500 bg-emerald-50'
+                        : 'hover:bg-gray-50'
                         }`}
                     onClick={() => onSelectTask(task.id)}
                 >

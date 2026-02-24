@@ -8,12 +8,15 @@ import { DropoutRegularization } from '@/components/dnn/DropoutRegularization'
 import { BatchNormalization } from '@/components/dnn/BatchNormalization'
 import { LearningRateScheduler } from '@/components/dnn/LearningRateScheduler'
 import { OverfittingDemo } from '@/components/dnn/OverfittingDemo'
+import { EnhancedDNNTraining } from '@/components/dnn/EnhancedDNNTraining'
 
 export default function DNNPage() {
-    const [selectedTask, setSelectedTask] = useState('builder')
+    const [selectedTask, setSelectedTask] = useState('training')
 
     const renderTask = () => {
         switch (selectedTask) {
+            case 'training':
+                return <EnhancedDNNTraining />
             case 'builder':
                 return <InteractiveNetworkBuilder />
             case 'layers':
@@ -27,7 +30,7 @@ export default function DNNPage() {
             case 'overfitting':
                 return <OverfittingDemo />
             default:
-                return <InteractiveNetworkBuilder />
+                return <EnhancedDNNTraining />
         }
     }
 
