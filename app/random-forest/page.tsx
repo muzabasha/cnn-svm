@@ -6,9 +6,10 @@ import { ForestVisualization } from '@/components/random-forest/ForestVisualizat
 import { BootstrappingModule } from '@/components/random-forest/BootstrappingModule'
 import { VotingMechanism } from '@/components/random-forest/VotingMechanism'
 import { FeatureImportance } from '@/components/random-forest/FeatureImportance'
+import { EnhancedRandomForestTraining } from '@/components/random-forest/EnhancedRandomForestTraining'
 
 export default function RandomForestLab() {
-    const [activeModule, setActiveModule] = useState<string>('forest-viz')
+    const [activeModule, setActiveModule] = useState<string>('training')
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-cyan-50">
@@ -28,6 +29,7 @@ export default function RandomForestLab() {
                 />
 
                 <div className="mt-6">
+                    {activeModule === 'training' && <EnhancedRandomForestTraining />}
                     {activeModule === 'forest-viz' && <ForestVisualization />}
                     {activeModule === 'bootstrapping' && <BootstrappingModule />}
                     {activeModule === 'voting' && <VotingMechanism />}

@@ -1,7 +1,7 @@
 'use client'
 
 import { Card, CardContent } from '@/components/ui/card'
-import { Trees, Shuffle, Vote, TrendingUp } from 'lucide-react'
+import { Trees, Shuffle, Vote, TrendingUp, Target } from 'lucide-react'
 
 interface Props {
     activeModule: string
@@ -10,6 +10,13 @@ interface Props {
 
 export function RandomForestTaskSelector({ activeModule, onModuleChange }: Props) {
     const modules = [
+        {
+            id: 'training',
+            name: '🌟 Enhanced Training',
+            icon: Target,
+            description: 'Full training with hyperparameters',
+            color: 'bg-gradient-to-br from-yellow-400 to-orange-400'
+        },
         {
             id: 'forest-viz',
             name: 'Forest Visualization',
@@ -41,15 +48,19 @@ export function RandomForestTaskSelector({ activeModule, onModuleChange }: Props
     ]
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
             {modules.map((module) => {
                 const Icon = module.icon
                 return (
                     <Card
                         key={module.id}
-                        className={`cursor-pointer transition-all hover:shadow-lg ${activeModule === module.id
-                                ? 'ring-2 ring-teal-500 shadow-lg'
-                                : 'hover:ring-2 hover:ring-teal-300'
+                        className={`cursor-pointer transition-all hover:shadow-lg ${module.id === 'training'
+                                ? activeModule === module.id
+                                    ? 'ring-2 ring-yellow-500 shadow-lg'
+                                    : 'hover:ring-2 hover:ring-yellow-400 shadow-md'
+                                : activeModule === module.id
+                                    ? 'ring-2 ring-teal-500 shadow-lg'
+                                    : 'hover:ring-2 hover:ring-teal-300'
                             }`}
                         onClick={() => onModuleChange(module.id)}
                     >
