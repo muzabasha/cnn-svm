@@ -11,6 +11,12 @@ interface Task {
 
 const tasks: Task[] = [
     {
+        id: 'training',
+        title: '🌟 Enhanced Training',
+        description: 'Full RNN/LSTM/GRU training',
+        icon: '🎯'
+    },
+    {
         id: 'weather-pattern',
         title: 'Weather Pattern Recognition',
         description: 'Predict weather using RNN',
@@ -55,13 +61,17 @@ interface RNNTaskSelectorProps {
 
 export function RNNTaskSelector({ selectedTask, onSelectTask }: RNNTaskSelectorProps) {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3 sm:gap-4">
             {tasks.map((task) => (
                 <Card
                     key={task.id}
-                    className={`p-4 sm:p-6 cursor-pointer transition-all hover:shadow-lg active:scale-98 ${selectedTask === task.id
-                        ? 'ring-2 ring-purple-500 bg-purple-50'
-                        : 'hover:bg-gray-50'
+                    className={`p-4 sm:p-6 cursor-pointer transition-all hover:shadow-lg active:scale-98 ${task.id === 'training'
+                            ? selectedTask === task.id
+                                ? 'ring-2 ring-yellow-500 bg-yellow-50 shadow-lg'
+                                : 'hover:ring-2 hover:ring-yellow-400 shadow-md'
+                            : selectedTask === task.id
+                                ? 'ring-2 ring-purple-500 bg-purple-50'
+                                : 'hover:bg-gray-50'
                         }`}
                     onClick={() => onSelectTask(task.id)}
                 >

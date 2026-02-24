@@ -8,12 +8,15 @@ import { GRUComparison } from '@/components/rnn/GRUComparison'
 import { VanishingGradient } from '@/components/rnn/VanishingGradient'
 import { TimeSeriesPrediction } from '@/components/rnn/TimeSeriesPrediction'
 import { WeatherPatternRecognition } from '@/components/rnn/WeatherPatternRecognition'
+import { EnhancedRNNTraining } from '@/components/rnn/EnhancedRNNTraining'
 
 export default function RNNPage() {
-    const [selectedTask, setSelectedTask] = useState('weather-pattern')
+    const [selectedTask, setSelectedTask] = useState('training')
 
     const renderTask = () => {
         switch (selectedTask) {
+            case 'training':
+                return <EnhancedRNNTraining />
             case 'weather-pattern':
                 return <WeatherPatternRecognition />
             case 'sequence':
@@ -27,7 +30,7 @@ export default function RNNPage() {
             case 'timeseries':
                 return <TimeSeriesPrediction />
             default:
-                return <WeatherPatternRecognition />
+                return <EnhancedRNNTraining />
         }
     }
 

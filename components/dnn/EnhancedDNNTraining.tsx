@@ -165,7 +165,7 @@ export function EnhancedDNNTraining() {
         setLayerWeights(generateLayerWeights(0))
     }
 
-    const currentData = trainingData[currentEpoch] || trainingData[0]
+    const currentData = trainingData[currentEpoch] || { trainLoss: 0, valLoss: 0, trainAcc: 0, valAcc: 0, epoch: 0 }
     const visibleData = trainingData.slice(0, currentEpoch + 1)
 
     return (
@@ -456,8 +456,8 @@ export function EnhancedDNNTraining() {
                                             <tr
                                                 key={data.epoch}
                                                 className={`transition-all ${data.epoch === currentEpoch
-                                                        ? 'bg-blue-100 border-l-4 border-l-blue-600'
-                                                        : 'hover:bg-gray-50'
+                                                    ? 'bg-blue-100 border-l-4 border-l-blue-600'
+                                                    : 'hover:bg-gray-50'
                                                     }`}
                                             >
                                                 <td className="border px-4 py-3">
