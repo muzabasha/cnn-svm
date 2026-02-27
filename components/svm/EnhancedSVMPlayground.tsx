@@ -25,17 +25,12 @@ export function EnhancedSVMPlayground() {
     const [gamma, setGamma] = useState(0.5)
     const [svmResult, setSvmResult] = useState<SVMResult | null>(null)
     const [completedChallenges, setCompletedChallenges] = useState<string[]>([])
-    const canvasRef = useRef<HTMLCanvasElement>(null)
 
     useEffect(() => {
         if (points.length >= 4) {
             trainSVM()
         }
     }, [points, kernel, C, gamma])
-
-    useEffect(() => {
-        drawDecisionBoundary()
-    }, [svmResult, points])
 
     const trainSVM = () => {
         // Simplified SVM for demonstration
@@ -77,90 +72,6 @@ export function EnhancedSVMPlayground() {
         const margin = distances[0]?.distance || 0
 
         setSvmResult({ supportVectors, margin, w, b })
-    }
-
-    const drawDecisionBoundary = () => {
-        const canvas = canvasRef.current
-        if (!canvas || !svmResult) return
-
-        const ctx = canvas.getContext('2d')
-        if (!ctx) return
-
-        ctx.clearRect(0, 0, 600, 400)
-
-        // Draw grid
-        ctx.strokeStyle = '#e5e7eb'
-        ctx.lineWidth = 1
-        for (let i = 0; i <= 600; i += 50) {
-            ctx.beginPath()
-            ctx.moveTo(i, 0)
-            ctx.lineTo(i, 400)
-            ctx.stroke()
-        }
-        for (let i = 0; i <= 400; i += 50) {
-            ctx.beginPath()
-            ctx.moveTo(0, i)
-            ctx.lineTo(600, i)
-            ctx.stroke()
-        }
-
-        // Draw decision boundary
-        const { w, b } = svmResult
-        if (Math.abs(w.y) > 0.001) {
-            const x1 = 0
-            const y1 = -(w.x * x1 + b) / w.y
-            const x2 = 600
-            const y2 = -(w.x * x2 + b) / w.y
-
-            // Main boundary
-            ctx.strokeStyle = '#8b5cf6'
-            ctx.lineWidth = 3
-            ctx.beginPath()
-            ctx.moveTo(x1, y1)
-            ctx.lineTo(x2, y2)
-            ctx.stroke()
-
-            // Margin boundaries
-            const margin = svmResult.margin * 50 // Scale for visualization
-            ctx.strokeStyle = '#8b5cf6'
-            ctx.lineWidth = 1
-            ctx.setLineDash([5, 5])
-
-            // Upper margin
-            const offset = margin / Math.sqrt(w.x ** 2 + w.y ** 2)
-            const y1_upper = y1 - offset * w.x
-            const y2_upper = y2 - offset * w.x
-            ctx.beginPath()
-            ctx.moveTo(x1, y1_upper)
-            ctx.lineTo(x2, y2_upper)
-            ctx.stroke()
-
-            // Lower margin
-            const y1_lower = y1 + offset * w.x
-            const y2_lower = y2 + offset * w.x
-            ctx.beginPath()
-            ctx.moveTo(x1, y1_lower)
-            ctx.lineTo(x2, y2_lower)
-            ctx.stroke()
-
-            ctx.setLineDash([])
-        }
-
-        // Draw points
-        points.forEach(point => {
-            const isSupportVector = svmResult.supportVectors.some(sv => sv.id === point.id)
-
-            ctx.fillStyle = point.class === 0 ? '#ef4444' : '#3b82f6'
-            ctx.beginPath()
-            ctx.arc(point.x, point.y, isSupportVector ? 10 : 6, 0, 2 * Math.PI)
-            ctx.fill()
-
-            if (isSupportVector) {
-                ctx.strokeStyle = '#000'
-                ctx.lineWidth = 2
-                ctx.stroke()
-            }
-        })
     }
 
     const handlePointsChange = (newPoints: DataPoint[]) => {
@@ -273,24 +184,16 @@ export function EnhancedSVMPlayground() {
 
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                                 <div className="lg:col-span-2 space-y-4">
-                                    <div className="relative">
-                                        <canvas
-                                            ref={canvasRef}
-                                            width={600}
-                                            height={400}
-                                            className="border-2 border-gray-300 rounded-lg bg-white absolute top-0 left-0 pointer-events-none"
-                                        />
-                                        <InteractiveCanvas
-                                            width={600}
-                                            height={400}
-                                            onPointsChange={handlePointsChange}
-                                            initialPoints={points}
-                                            numClasses={2}
-                                            classColors={['#ef4444', '#3b82f6']}
-                                            instructions="Add points to see SVM decision boundary"
-                                            showGrid={false}
-                                        />
-                                    </div>
+                                    <InteractiveCanvas
+                                        width={600}
+                                        height={400}
+                                        onPointsChange={handlePointsChange}
+                                        initialPoints={points}
+                                        numClasses={2}
+                                        classColors={['#ef4444', '#3b82f6']}
+                                        instructions="Add red and blue points to see SVM decision boundary"
+                                        showGrid={true}
+                                    />
 
                                     {svmResult && (
                                         <div className="p-4 bg-green-50 rounded-lg border border-green-200">
@@ -327,8 +230,8 @@ export function EnhancedSVMPlayground() {
                                                     <button
                                                         onClick={() => setKernel('linear')}
                                                         className={`w-full p-2 text-sm rounded-lg border-2 transition-all ${kernel === 'linear'
-                                                                ? 'border-purple-500 bg-purple-50'
-                                                                : 'border-gray-200'
+                                                            ? 'border-purple-500 bg-purple-50'
+                                                            : 'border-gray-200'
                                                             }`}
                                                     >
                                                         Linear (straight line)
@@ -336,8 +239,8 @@ export function EnhancedSVMPlayground() {
                                                     <button
                                                         onClick={() => setKernel('rbf')}
                                                         className={`w-full p-2 text-sm rounded-lg border-2 transition-all ${kernel === 'rbf'
-                                                                ? 'border-purple-500 bg-purple-50'
-                                                                : 'border-gray-200'
+                                                            ? 'border-purple-500 bg-purple-50'
+                                                            : 'border-gray-200'
                                                             }`}
                                                     >
                                                         RBF (curved boundary)
