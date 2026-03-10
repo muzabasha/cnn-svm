@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { RLTaskSelector } from '@/components/reinforcement-learning/RLTaskSelector'
+import { EnhancedRLTraining } from '@/components/reinforcement-learning/EnhancedRLTraining'
 import { RLBasics } from '@/components/reinforcement-learning/RLBasics'
 import { QLearning } from '@/components/reinforcement-learning/QLearning'
 import { PolicyGradient } from '@/components/reinforcement-learning/PolicyGradient'
@@ -9,10 +10,12 @@ import { ExplorationExploitation } from '@/components/reinforcement-learning/Exp
 import { GridWorldSimulator } from '@/components/reinforcement-learning/GridWorldSimulator'
 
 export default function ReinforcementLearningPage() {
-    const [selectedTask, setSelectedTask] = useState('basics')
+    const [selectedTask, setSelectedTask] = useState('training')
 
     const renderTask = () => {
         switch (selectedTask) {
+            case 'training':
+                return <EnhancedRLTraining />
             case 'basics':
                 return <RLBasics />
             case 'qlearning':
@@ -24,7 +27,7 @@ export default function ReinforcementLearningPage() {
             case 'gridworld':
                 return <GridWorldSimulator />
             default:
-                return <RLBasics />
+                return <EnhancedRLTraining />
         }
     }
 

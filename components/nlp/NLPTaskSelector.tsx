@@ -11,6 +11,12 @@ interface Task {
 
 const tasks: Task[] = [
     {
+        id: 'training',
+        title: '🌟 Enhanced Training',
+        description: 'Full hyperparameter control & visualization',
+        icon: '⚡'
+    },
+    {
         id: 'embeddings',
         title: 'Word Embeddings',
         description: 'Word2Vec, GloVe, and semantic spaces',
@@ -55,12 +61,14 @@ interface NLPTaskSelectorProps {
 
 export function NLPTaskSelector({ selectedTask, onSelectTask }: NLPTaskSelectorProps) {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4">
             {tasks.map((task) => (
                 <Card
                     key={task.id}
                     className={`p-4 sm:p-6 cursor-pointer transition-all hover:shadow-lg active:scale-98 ${selectedTask === task.id
-                            ? 'ring-2 ring-indigo-500 bg-indigo-50'
+                        ? 'ring-2 ring-indigo-500 bg-indigo-50'
+                        : task.id === 'training'
+                            ? 'bg-gradient-to-r from-yellow-50 to-orange-50 hover:from-yellow-100 hover:to-orange-100'
                             : 'hover:bg-gray-50'
                         }`}
                     onClick={() => onSelectTask(task.id)}

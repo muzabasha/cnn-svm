@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { NLPTaskSelector } from '@/components/nlp/NLPTaskSelector'
+import { EnhancedNLPTraining } from '@/components/nlp/EnhancedNLPTraining'
 import { WordEmbeddings } from '@/components/nlp/WordEmbeddings'
 import { AttentionMechanism } from '@/components/nlp/AttentionMechanism'
 import { TransformerArchitecture } from '@/components/nlp/TransformerArchitecture'
@@ -10,10 +11,12 @@ import { SequenceToSequence } from '@/components/nlp/SequenceToSequence'
 import { SentimentAnalysis } from '@/components/nlp/SentimentAnalysis'
 
 export default function NLPPage() {
-    const [selectedTask, setSelectedTask] = useState('embeddings')
+    const [selectedTask, setSelectedTask] = useState('training')
 
     const renderTask = () => {
         switch (selectedTask) {
+            case 'training':
+                return <EnhancedNLPTraining />
             case 'embeddings':
                 return <WordEmbeddings />
             case 'attention':
@@ -27,7 +30,7 @@ export default function NLPPage() {
             case 'sentiment':
                 return <SentimentAnalysis />
             default:
-                return <WordEmbeddings />
+                return <EnhancedNLPTraining />
         }
     }
 

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { MultipleRegressionTaskSelector } from '@/components/multiple-regression/MultipleRegressionTaskSelector'
+import { EnhancedRegressionTraining } from '@/components/multiple-regression/EnhancedRegressionTraining'
 import { LinearModel } from '@/components/multiple-regression/LinearModel'
 import { FeatureScaling } from '@/components/multiple-regression/FeatureScaling'
 import { PolynomialFeatures } from '@/components/multiple-regression/PolynomialFeatures'
@@ -10,10 +11,12 @@ import { CropPriceForecasting } from '@/components/multiple-regression/CropPrice
 import { DemandPrediction } from '@/components/multiple-regression/DemandPrediction'
 
 export default function MultipleRegressionPage() {
-    const [selectedTask, setSelectedTask] = useState('crop-price')
+    const [selectedTask, setSelectedTask] = useState('training')
 
     const renderTask = () => {
         switch (selectedTask) {
+            case 'training':
+                return <EnhancedRegressionTraining />
             case 'crop-price':
                 return <CropPriceForecasting />
             case 'demand-prediction':
@@ -27,7 +30,7 @@ export default function MultipleRegressionPage() {
             case 'regularization':
                 return <RegularizationTechniques />
             default:
-                return <CropPriceForecasting />
+                return <EnhancedRegressionTraining />
         }
     }
 
